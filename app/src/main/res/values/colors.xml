@@ -10,4 +10,5 @@
 
     <color name="gray">#CCCCCCCC</color>
     <color name="sectors_color">#FA8F70</color>
+    <color name="planet_item_color">#DABA8B</color>
 </resources>
