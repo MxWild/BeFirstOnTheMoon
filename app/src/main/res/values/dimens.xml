@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="margin_button_bottom">26dp</dimen>
     <dimen name="button_background_corner">8dp</dimen>
-    <dimen name="buttom_padding">8dp</dimen>
+    <dimen name="button_padding">8dp</dimen>
     <dimen name="button_width">230dp</dimen>
     <dimen name="button_height">60dp</dimen>
 </resources>
