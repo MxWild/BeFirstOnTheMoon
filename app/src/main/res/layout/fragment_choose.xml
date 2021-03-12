@@ -20,11 +20,23 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button"
+        style="@style/ButtonStyle"
         android:layout_width="@dimen/button_width"
         android:layout_height="@dimen/button_height"
-        style="@style/ButtonStyle"
+        android:fontFamily="@font/playfair_display_sc_black"
         android:text="Выбрать"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/comet_background" />
 </androidx.constraintlayout.widget.ConstraintLayout>
