@@ -3,8 +3,6 @@
     <dimen name="margin_button_bottom">26dp</dimen>
     <dimen name="button_background_corner">8dp</dimen>
     <dimen name="button_padding">8dp</dimen>
-    <dimen name="button_padding_start">50dp</dimen>
-    <dimen name="button_padding_end">50dp</dimen>
     <dimen name="button_width">230dp</dimen>
     <dimen name="button_height">60dp</dimen>
 </resources>
