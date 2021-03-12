@@ -15,8 +15,8 @@ class BasicGlobeFragment : Fragment() {
 
     private lateinit var wwd: WorldWindow
 
-    fun createWorldWindow(): WorldWindow {
-        val moon = ImageSource.fromResource(R.drawable.moon)
+    private fun createWorldWindow(): WorldWindow {
+        val moon = ImageSource.fromResource(R.drawable.venus)
         this.wwd = WorldWindow(context)
         this.wwd.layers.addLayer(BackgroundLayer(moon, null))
 //        this.wwd.layers.addLayer(BlueMarbleLandsatLayer())
