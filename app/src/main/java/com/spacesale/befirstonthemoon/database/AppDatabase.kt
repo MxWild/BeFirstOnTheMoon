@@ -24,7 +24,7 @@ import com.spacesale.befirstonthemoon.database.entity.UserEntity
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun planetDao(): PlanetDao
-    abstract fun SectorDao(): SectorDao
+    abstract fun sectorDao(): SectorDao
 
     companion object {
         private const val DB_NAME = "beFirstOnTheMoon"
