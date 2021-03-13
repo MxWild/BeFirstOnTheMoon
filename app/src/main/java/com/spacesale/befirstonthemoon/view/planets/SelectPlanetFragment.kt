@@ -51,8 +51,8 @@ class SelectPlanetFragment : Fragment() {
             /*binding.planetImage.load(getInt(ARG_PLANET_DRAWABLE)) {
                 crossfade(true)
             }*/
-            val image: ImageView = view.findViewById(R.id.planet_image)
-            image.setImageResource(getInt(ARG_PLANET_DRAWABLE))
+            //val image: ImageView = view.findViewById(R.id.planet_image)
+            binding.planetImage.setImageResource(getInt(ARG_PLANET_DRAWABLE))
         }
     }
 
