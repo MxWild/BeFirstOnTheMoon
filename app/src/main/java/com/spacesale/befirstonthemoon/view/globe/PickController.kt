@@ -10,14 +10,14 @@ import gov.nasa.worldwind.render.Renderable
 import gov.nasa.worldwind.shape.Highlightable
 import java.util.*
 
-class PickController(private val context: Context) : BasicWorldWindowController() {
+open class PickController(private val context: Context) : BasicWorldWindowController() {
 
-    protected var pickedObjects = ArrayList<Any>()
+    private var pickedObjects = ArrayList<Any>()
 
     /**
      * Assign a subclassed SimpleOnGestureListener to a GestureDetector to handle the "pick" events.
      */
-    protected var pickGestureDetector =
+    private var pickGestureDetector =
         GestureDetector(context, object : SimpleOnGestureListener() {
             override fun onSingleTapUp(event: MotionEvent): Boolean {
                 pick(event) // Pick the object(s) at the tap location
@@ -37,7 +37,7 @@ class PickController(private val context: Context) : BasicWorldWindowController(
      * Performs a pick at the tap location.
      */
     fun pick(event: MotionEvent) {
-        val PICK_REGION_SIZE = 40 // pixels
+        val pickRegionSize = 40 // pixels
 
         // Forget our last picked objects
         togglePickedObjectHighlights()
@@ -45,9 +45,9 @@ class PickController(private val context: Context) : BasicWorldWindowController(
 
         // Perform a new pick at the screen x, y
         val pickList = worldWindow.pickShapesInRect(
-            event.x - PICK_REGION_SIZE / 2,
-            event.y - PICK_REGION_SIZE / 2,
-            PICK_REGION_SIZE.toFloat(), PICK_REGION_SIZE.toFloat()
+            event.x - pickRegionSize / 2,
+            event.y - pickRegionSize / 2,
+            pickRegionSize.toFloat(), pickRegionSize.toFloat()
         )
 
         // pickShapesInRect can return multiple objects, i.e., they're may be more that one 'top object'
@@ -64,21 +64,20 @@ class PickController(private val context: Context) : BasicWorldWindowController(
     /**
      * Toggles the highlighted state of a picked object.
      */
-    fun togglePickedObjectHighlights() {
+    private fun togglePickedObjectHighlights() {
         var message = ""
         for (pickedObject in pickedObjects) {
             if (pickedObject is Highlightable) {
-                val highlightable = pickedObject
-                highlightable.isHighlighted = !highlightable.isHighlighted
-                if (highlightable.isHighlighted) {
-                    if (!message.isEmpty()) {
+                pickedObject.isHighlighted = !pickedObject.isHighlighted
+                if (pickedObject.isHighlighted) {
+                    if (message.isNotEmpty()) {
                         message += ", "
                     }
-                    message += (highlightable as Renderable).displayName
+                    message += (pickedObject as Renderable).displayName
                 }
             }
         }
-        if (!message.isEmpty()) {
+        if (message.isNotEmpty()) {
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
         }
         this.worldWindow.requestRedraw()
