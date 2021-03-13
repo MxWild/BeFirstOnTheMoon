@@ -9,7 +9,9 @@ import com.spacesale.befirstonthemoon.domain.Planet
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
-class GlobeViewModel(private val globeRepository: GlobeRepository) : ViewModel() {
+class GlobeViewModel(
+    private val repository: GlobeRepository
+) : ViewModel() {
 
     private val _mutablePlanet = MutableLiveData<Planet>()
     val planet: LiveData<Planet> get() = _mutablePlanet
@@ -17,7 +19,7 @@ class GlobeViewModel(private val globeRepository: GlobeRepository) : ViewModel()
     fun loadPlanetInfo(planetId: Int) {
         viewModelScope.launch {
             try {
-                _mutablePlanet.value = globeRepository.getPlanetById(planetId)
+                _mutablePlanet.value = repository.getPlanetById(planetId)
             } catch (e: Exception) {
                 Log.e(
                     GlobeViewModel::class.java.simpleName,

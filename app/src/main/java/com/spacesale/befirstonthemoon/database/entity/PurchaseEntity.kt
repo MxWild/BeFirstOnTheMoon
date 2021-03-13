@@ -11,5 +11,7 @@ data class PurchaseEntity(
     @ColumnInfo(name = "userId")
     val userId: Int,
     @ColumnInfo(name = "planetId")
-    val planetId: Int
+    val planetId: Int,
+    @ColumnInfo(name = "sectorId")
+    val sectorId: Int
 )

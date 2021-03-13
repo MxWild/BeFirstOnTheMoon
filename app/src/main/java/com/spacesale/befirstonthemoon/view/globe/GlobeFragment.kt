@@ -6,20 +6,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import com.spacesale.befirstonthemoon.R
 import com.spacesale.befirstonthemoon.databinding.FragmentGlobeBinding
 import com.spacesale.befirstonthemoon.view.profile.ProfileFragment
 import gov.nasa.worldwind.WorldWindow
 import gov.nasa.worldwind.layer.BackgroundLayer
 import gov.nasa.worldwind.render.ImageSource
+import org.koin.android.viewmodel.ext.android.viewModel
+import kotlin.properties.Delegates
 
 class GlobeFragment : Fragment() {
 
-    private val viewModel: GlobeViewModel by viewModels()
+    private val viewModel: GlobeViewModel by viewModel()
 
     private lateinit var wwd: WorldWindow
-    private var planetId: Int? = null
+    private var planetId by Delegates.notNull<Int>()
     private var _binding: FragmentGlobeBinding? = null
     private val binding get() = _binding!!
 
@@ -27,6 +28,7 @@ class GlobeFragment : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             planetId = it.getInt(PARAM_PLANET_ID)
+            viewModel.loadPlanetInfo(planetId)
         }
     }
 
@@ -36,15 +38,16 @@ class GlobeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentGlobeBinding.inflate(inflater, container, false)
-        planetId?.let {
-            viewModel.loadPlanetInfo(it)
-        }
-        binding.globe.addView(createWorldWindow())
+        wwd = WorldWindow(context)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.planet.observe(viewLifecycleOwner) {
+            showGlobe(planetId)
+        }
 
         binding.buttonBack.setOnClickListener {
             parentFragmentManager.popBackStack()
@@ -52,7 +55,7 @@ class GlobeFragment : Fragment() {
 
         binding.buttonProfile.setOnClickListener {
             parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, ProfileFragment.instance(ArrayList()))
+                .replace(R.id.fragment_container, ProfileFragment.instance(1/*todo*/))
                 .addToBackStack(null)
                 .commit()
         }
@@ -80,18 +83,21 @@ class GlobeFragment : Fragment() {
         _binding = null
     }
 
+    private fun showGlobe(planetId: Int) {
+        viewModel.loadPlanetInfo(planetId)
+        binding.globe.addView(createWorldWindow())
+    }
+
     private fun createWorldWindow(): WorldWindow {
         val moon = viewModel.planet.value?.let {
             ImageSource.fromResource(it.texture)
         }
-        wwd = WorldWindow(context)
 //        wwd.setBackgroundResource(R.drawable.background_stars)
         wwd.layers.addLayer(BackgroundLayer(moon, null))
         return wwd
     }
 
     companion object {
-
         private const val PARAM_PLANET_ID = "planetId"
 
         fun newInstance(planetId: Int): GlobeFragment {

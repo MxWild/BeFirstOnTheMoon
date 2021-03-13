@@ -61,14 +61,14 @@ class PlanetDetailsFragment : Fragment() {
 
         binding.profileButton.setOnClickListener {
             parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, ProfileFragment.instance(ArrayList()))
+                .replace(R.id.fragment_container, ProfileFragment.instance(1/*todo*/))
                 .addToBackStack(null)
                 .commit()
         }
 
         binding.buyPartOfPlanet.setOnClickListener {
             parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, GlobeFragment.newInstance(planetId!!))
+                .replace(R.id.fragment_container, GlobeFragment.newInstance(planetId!! + 1))
                 .addToBackStack(null)
                 .commit()
         }
