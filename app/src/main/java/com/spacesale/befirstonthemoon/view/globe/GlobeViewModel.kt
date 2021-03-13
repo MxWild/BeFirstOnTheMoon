@@ -46,4 +46,11 @@ class GlobeViewModel(
         }
     }
 
+    fun buySector(planetId: Int,sectorId: Int) {
+        viewModelScope.launch {
+            repository.buySector(planetId,sectorId)
+        }
+
+    }
+
 }

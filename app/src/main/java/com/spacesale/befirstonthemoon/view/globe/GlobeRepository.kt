@@ -2,6 +2,7 @@ package com.spacesale.befirstonthemoon.view.globe
 
 import com.spacesale.befirstonthemoon.database.AppDatabase
 import com.spacesale.befirstonthemoon.database.entity.PlanetEntity
+import com.spacesale.befirstonthemoon.database.entity.PurchaseEntity
 import com.spacesale.befirstonthemoon.database.entity.SectorEntity
 import com.spacesale.befirstonthemoon.domain.Planet
 import com.spacesale.befirstonthemoon.domain.Sector
@@ -30,6 +31,11 @@ class GlobeRepository(private val db: AppDatabase) {
         atmosphere = planetEntity.atmosphere,
         characteristics = planetEntity.characteristic
     )
+
+    suspend fun buySector(planetId: Int,sectorId: Int)= withContext(Dispatchers.IO) {
+        db.sectorDao().buySector(planetId,sectorId)
+        db.userDao().insertPurchase(PurchaseEntity(null,1,planetId,sectorId))
+    }
 
     private fun convertSectorEntityToSector(sectorEntity: SectorEntity) = Sector(
         sectorId = sectorEntity.ID,
