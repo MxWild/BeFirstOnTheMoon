@@ -6,8 +6,8 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "purchase")
 data class PurchaseEntity(
-    @PrimaryKey
-    val purchaseId: Int,
+    @PrimaryKey(autoGenerate = true)
+    val purchaseId: Int? =0,
     @ColumnInfo(name = "userId")
     val userId: Int,
     @ColumnInfo(name = "planetId")
