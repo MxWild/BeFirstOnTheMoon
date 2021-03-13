@@ -7,7 +7,7 @@ import com.spacesale.befirstonthemoon.database.entity.SectorEntity
 @Dao
 interface SectorDao {
 
-    @Query("SELECT * FROM PLANETS WHERE planetId = :planetId")
+    @Query("SELECT * FROM SECTOR WHERE planetId = :planetId")
     fun getSectorsByPlanetId(planetId: Int): List<SectorEntity>
 
     @Query("DELETE FROM sector")

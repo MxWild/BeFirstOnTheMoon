@@ -17,9 +17,9 @@ data class PlanetEntity(
     @ColumnInfo(name = "characteristic")
     val characteristic: String,
     @ColumnInfo(name = "main_poster")
-    val mainPoster: String,
+    val mainPoster: Int,
     @ColumnInfo(name = "detail_poster")
-    val detailPoster: String,
+    val detailPoster: Int,
     @ColumnInfo(name = "texture")
-    val texture: String
+    val texture: Int
 )
