@@ -70,128 +70,110 @@ class SplashFragment : Fragment() {
         val height = getScreenHeight(metrics)
         val width = getScreenWidth(metrics)
 
-        val valueAnimator0 = ValueAnimator.ofFloat(-1000f,
+        val catYAnimator = ValueAnimator.ofFloat(-1000f,
             (height / density / 1.25).toFloat()
         )
-        valueAnimator0.addUpdateListener {
+        catYAnimator.addUpdateListener {
             val value = it.animatedValue as Float
             catImage.translationY = value
         }
+        catYAnimator.interpolator = AccelerateInterpolator(2.5f)
+        catYAnimator.duration = 1000
+        catYAnimator.start()
 
-        valueAnimator0.interpolator = AccelerateInterpolator(2.5f)
-        valueAnimator0.duration = 1000
-
-        valueAnimator0.start()
-
-        val valueAnimator1 = ValueAnimator.ofFloat(-500f,
+        val catXAnimator = ValueAnimator.ofFloat(-500f,
             (width / density / 1.1).toFloat()
         )
-        valueAnimator1.addUpdateListener {
+        catXAnimator.addUpdateListener {
             val value = it.animatedValue as Float
             catImage.translationX = value
         }
+        catXAnimator.interpolator = AccelerateInterpolator(2.5f)
+        catXAnimator.duration = 1000
+        catXAnimator.start()
 
-        valueAnimator1.interpolator = AccelerateInterpolator(2.5f)
-        valueAnimator1.duration = 1000
-
-        valueAnimator1.start()
-
-        val valueAnimator2 = ValueAnimator.ofFloat(0.25f, 1f)
-        valueAnimator2.addUpdateListener {
+        val catScaleAnimator = ValueAnimator.ofFloat(0.25f, 1f)
+        catScaleAnimator.addUpdateListener {
             val value = it.animatedValue as Float
             catImage.scaleX = value
             catImage.scaleY = value
         }
+        catScaleAnimator.interpolator = LinearInterpolator()
+        catScaleAnimator.duration = 1000
+        catScaleAnimator.start()
 
-        valueAnimator2.interpolator = LinearInterpolator()
-        valueAnimator2.duration = 1000
-
-        valueAnimator2.start()
-
-        val valueAnimator3 = ValueAnimator.ofFloat(0f, 10f)
-        valueAnimator3.addUpdateListener {
+        val catRotationAnimator = ValueAnimator.ofFloat(0f, 10f)
+        catRotationAnimator.addUpdateListener {
             val value = it.animatedValue as Float
             catImage.rotation = value
         }
+        catRotationAnimator.interpolator = LinearInterpolator()
+        catRotationAnimator.duration = 1000
+        catRotationAnimator.start()
 
-        valueAnimator3.interpolator = AccelerateInterpolator(2.5f)
-        valueAnimator3.duration = 1000
-
-        valueAnimator3.start()
-
-        val valueAnimator4 = ValueAnimator.ofFloat(-1000f, 50f)
-        valueAnimator4.addUpdateListener {
+        val textAnimator = ValueAnimator.ofFloat(-1000f, 50f)
+        textAnimator.addUpdateListener {
             val value = it.animatedValue as Float
             appName.translationX = value
         }
+        textAnimator.interpolator = AccelerateInterpolator(2.5f)
+        textAnimator.duration = 1000
+        textAnimator.start()
 
-        valueAnimator4.interpolator = AccelerateInterpolator(2.5f)
-        valueAnimator4.duration = 1000
-
-        valueAnimator4.start()
-
-        val valueAnimator5 = ValueAnimator.ofFloat(-200f, 1100f)
-        valueAnimator5.addUpdateListener {
+        val cometLeftXAnimator = ValueAnimator.ofFloat(-200f, 1100f)
+        cometLeftXAnimator.addUpdateListener {
             val value = it.animatedValue as Float
             cometLeft.translationX = value
         }
+        cometLeftXAnimator.interpolator = AccelerateInterpolator(2.5f)
+        cometLeftXAnimator.duration = 3000
+        cometLeftXAnimator.start()
 
-        valueAnimator5.interpolator = AccelerateInterpolator(2.5f)
-        valueAnimator5.duration = 2500
-
-        valueAnimator5.start()
-
-        val valueAnimator6 = ValueAnimator.ofFloat(-200f,
+        val cometLeftYAnimator = ValueAnimator.ofFloat(-200f,
             (height / density / 2.5).toFloat())
-        valueAnimator6.addUpdateListener {
+        cometLeftYAnimator.addUpdateListener {
             val value = it.animatedValue as Float
             cometLeft.translationY = value
         }
+        cometLeftYAnimator.interpolator = AccelerateInterpolator(2.5f)
+        cometLeftYAnimator.duration = 3000
+        cometLeftYAnimator.start()
 
-        valueAnimator6.interpolator = AccelerateInterpolator(2.5f)
-        valueAnimator6.duration = 2500
-
-        valueAnimator6.start()
-
-        val valueAnimator7 = ValueAnimator.ofFloat(1100f, -200f)
-        valueAnimator7.addUpdateListener {
+        val cometRightXAnimator = ValueAnimator.ofFloat(1100f, -200f)
+        cometRightXAnimator.addUpdateListener {
             val value = it.animatedValue as Float
             cometRight.translationX = value
         }
+        cometRightXAnimator.interpolator = AccelerateInterpolator(2.5f)
+        cometRightXAnimator.duration = 3000
+        cometRightXAnimator.start()
 
-        valueAnimator7.interpolator = AccelerateInterpolator(2.5f)
-        valueAnimator7.duration = 2500
-
-        valueAnimator7.start()
-
-        val valueAnimator8 = ValueAnimator.ofFloat(-200f,
+        val cometRightYAnimator = ValueAnimator.ofFloat(-200f,
             (height / density / 2.5).toFloat())
-        valueAnimator8.addUpdateListener {
+        cometRightYAnimator.addUpdateListener {
             val value = it.animatedValue as Float
             cometRight.translationY = value
         }
+        cometRightYAnimator.interpolator = AccelerateInterpolator(2.5f)
+        cometRightYAnimator.duration = 3000
+        cometRightYAnimator.start()
 
-        valueAnimator8.interpolator = AccelerateInterpolator(2.5f)
-        valueAnimator8.duration = 2500
-
-        valueAnimator8.start()
-
-        val valueAnimator9 = ValueAnimator.ofFloat(0f, 360f)
-        valueAnimator9.addUpdateListener {
+        val sunRotationAnimator = ValueAnimator.ofFloat(0f, 360f)
+        sunRotationAnimator.addUpdateListener {
             val value = it.animatedValue as Float
             sun.rotation = value
         }
-
-        valueAnimator9.interpolator = AccelerateInterpolator(1.5f)
-        valueAnimator9.duration = 2000
-        valueAnimator9.repeatCount = ValueAnimator.INFINITE;
-
-        valueAnimator9.start()
+        sunRotationAnimator.interpolator = AccelerateInterpolator(1.5f)
+        sunRotationAnimator.duration = 2000
+        sunRotationAnimator.repeatCount = ValueAnimator.INFINITE;
+        sunRotationAnimator.start()
     }
 
-    private fun getScreenWidth(displayMetrics: DisplayMetrics): Float = displayMetrics.widthPixels.toFloat()
+    private fun getScreenWidth(displayMetrics: DisplayMetrics): Float =
+        displayMetrics.widthPixels.toFloat()
 
-    private fun getScreenHeight(displayMetrics: DisplayMetrics): Float = displayMetrics.heightPixels.toFloat()
+    private fun getScreenHeight(displayMetrics: DisplayMetrics): Float =
+        displayMetrics.heightPixels.toFloat()
 
     private fun getDensity(displayMetrics: DisplayMetrics) = displayMetrics.density
 

@@ -5,21 +5,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.Toast
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.spacesale.befirstonthemoon.R
 import com.spacesale.befirstonthemoon.domain.Planet
+import org.koin.android.viewmodel.ext.android.viewModel
 
-class SelectFragment(planets: Map<Int, Planet>) : Fragment() {
+class SelectFragment(planets: MutableMap<Int, Planet>) : Fragment() {
 
-    private val mPlanets: Map<Int, Planet> = planets
+    private val mPlanets: MutableMap<Int, Planet> = planets
+
+    private val selectPlanetViewModel: SelectPlanetViewModel by viewModel()
 
     private lateinit var selectAdapter: SelectAdapter
     private lateinit var viewPager: ViewPager2
 
     private lateinit var leftArrow: ImageView
     private lateinit var rightArrow: ImageView
+
+    private lateinit var loadText: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,18 +35,35 @@ class SelectFragment(planets: Map<Int, Planet>) : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        leftArrow = view.findViewById(R.id.left_arrow)
+        rightArrow = view.findViewById(R.id.right_arrow)
+        loadText = view.findViewById(R.id.load_text)
+
+        leftArrow.visibility = View.GONE
+        rightArrow.visibility = View.GONE
+        loadText.text = getString(R.string.loading_text_1)
 
         if (mPlanets.isEmpty()) {
-            Toast.makeText(context, "Перезапустите", Toast.LENGTH_LONG).show()
-            return
+            loadText.text = getString(R.string.loading_text_2)
+            selectPlanetViewModel.planetLiveData.observe(viewLifecycleOwner) { planets ->
+                planets.forEach {
+                    mPlanets[it.id] = it
+                }
+                if (!mPlanets.isEmpty()) {
+                    setViewPager(view)
+                }
+            }
+            selectPlanetViewModel.loadPlanets()
         }
+        else setViewPager(view)
+    }
+
+    private fun setViewPager(view: View) {
+        loadText.visibility = View.GONE
 
         selectAdapter = SelectAdapter(this, mPlanets)
         viewPager = view.findViewById(R.id.pager)
         viewPager.adapter = selectAdapter
-
-        leftArrow = view.findViewById(R.id.left_arrow)
-        rightArrow = view.findViewById(R.id.right_arrow)
 
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
@@ -63,6 +85,6 @@ class SelectFragment(planets: Map<Int, Planet>) : Fragment() {
     }
 
     companion object {
-        fun newInstance(planets: Map<Int, Planet>) = SelectFragment(planets)
+        fun newInstance(planets: MutableMap<Int, Planet>) = SelectFragment(planets)
     }
 }

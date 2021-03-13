@@ -9,5 +9,6 @@ class SelectAdapter(fragment: SelectFragment, private val planets: Map<Int, Plan
 
     override fun getItemCount(): Int = planets.size
 
-    override fun createFragment(position: Int): Fragment = SelectPlanetFragment.newInstance(position, planets)
+    override fun createFragment(position: Int): Fragment =
+        SelectPlanetFragment.newInstance(planets[position + 1]!!)
 }
