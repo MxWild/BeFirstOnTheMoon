@@ -17,15 +17,7 @@ import gov.nasa.worldwind.layer.RenderableLayer
 import gov.nasa.worldwind.render.ImageSource
 import gov.nasa.worldwind.shape.Polygon
 import gov.nasa.worldwind.shape.ShapeAttributes
-import gov.nasa.worldwind.util.Logger
-import gov.nasa.worldwind.util.WWUtil
-import gov.nasa.worldwind.shape.Polygon
-import gov.nasa.worldwind.shape.ShapeAttributes
 import org.koin.android.viewmodel.ext.android.viewModel
-import java.io.BufferedReader
-import java.io.IOException
-import java.io.InputStreamReader
-import java.util.*
 import kotlin.properties.Delegates
 
 class GlobeFragment : Fragment() {
