@@ -8,13 +8,18 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.spacesale.befirstonthemoon.R
+import com.spacesale.befirstonthemoon.domain.Planet
+
+val tempPlanets = arrayOf(
+    Planet(0, "Меркурий", R.drawable.mercury_select,
+        R.drawable.ic_marsdetails, R.drawable.mars, "", "", ""),
+    Planet(1, "Луна", R.drawable.moon_select,
+        R.drawable.ic_marsdetails, R.drawable.mars, "", "", ""),
+    Planet(2, "Марс", R.drawable.mars_select,
+        R.drawable.ic_marsdetails, R.drawable.mars, "", "", ""))
 
 data class PlanetInfo(val name: String, val image: Int)
-
-private val mPlanets = arrayOf(
-    PlanetInfo("Меркурий", R.drawable.mercury_select),
-    PlanetInfo("Луна", R.drawable.moon_select),
-    PlanetInfo("Марс", R.drawable.mars_select))
+private val mPlanets: MutableMap<Int, PlanetInfo> = mutableMapOf()
 
 class SelectFragment : Fragment() {
     private lateinit var selectAdapter: SelectAdapter
@@ -32,6 +37,10 @@ class SelectFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        tempPlanets.forEach {
+            mPlanets[it.id] = PlanetInfo(it.name, it.mainPoster)
+        }
+
         selectAdapter = SelectAdapter(this, mPlanets)
         viewPager = view.findViewById(R.id.pager)
         viewPager.adapter = selectAdapter
