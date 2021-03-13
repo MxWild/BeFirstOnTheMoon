@@ -72,9 +72,9 @@ class PlanetDetailsFragment : Fragment() {
                 .addToBackStack(null)
                 .commit()
         }
-
-        planetDetailsViewModel.showPlanet(1)
-
+        planetId?.let {
+            planetDetailsViewModel.showPlanet(it)
+        }
     }
 
     override fun onDestroyView() {
