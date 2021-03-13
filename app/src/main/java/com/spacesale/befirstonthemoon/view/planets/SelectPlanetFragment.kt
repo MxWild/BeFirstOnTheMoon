@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import coil.load
 import com.spacesale.befirstonthemoon.MainActivity
+import com.spacesale.befirstonthemoon.R
 import com.spacesale.befirstonthemoon.databinding.FragmentSelectPlanetBinding
 import com.spacesale.befirstonthemoon.domain.Planet
 import com.spacesale.befirstonthemoon.view.details.PlanetDetailsFragment
@@ -46,9 +48,11 @@ class SelectPlanetFragment : Fragment() {
             binding.planetNameText.text = getString(ARG_PLANET_NAME)
         }
         arguments?.takeIf { it.containsKey(ARG_PLANET_DRAWABLE) }?.apply {
-            binding.planetImage.load(getInt(ARG_PLANET_DRAWABLE)) {
+            /*binding.planetImage.load(getInt(ARG_PLANET_DRAWABLE)) {
                 crossfade(true)
-            }
+            }*/
+            val image: ImageView = view.findViewById(R.id.planet_image)
+            image.setImageResource(getInt(ARG_PLANET_DRAWABLE))
         }
     }
 
