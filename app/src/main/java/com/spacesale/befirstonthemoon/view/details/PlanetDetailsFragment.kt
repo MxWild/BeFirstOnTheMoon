@@ -68,7 +68,7 @@ class PlanetDetailsFragment : Fragment() {
 
         binding.buyPartOfPlanet.setOnClickListener {
             parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, GlobeFragment.newInstance(planetId!!))
+                .replace(R.id.fragment_container, GlobeFragment.newInstance(planetId!! + 1))
                 .addToBackStack(null)
                 .commit()
         }

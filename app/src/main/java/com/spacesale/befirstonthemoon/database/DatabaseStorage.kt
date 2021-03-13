@@ -79,7 +79,7 @@ class DatabaseStorage(private val context: Context, private val db: AppDatabase)
                 return@launch
 
             val writer = CSVReader(InputStreamReader(context.assets.open("world_boundaries.csv")))
-            var csvLines: List<Array<String>> = emptyList()
+            var csvLines: List<Array<String>>
             csvLines = writer.readAll()
             writer.close()
 
