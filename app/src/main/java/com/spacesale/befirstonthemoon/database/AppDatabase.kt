@@ -6,6 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.spacesale.befirstonthemoon.database.dao.PlanetDao
 import com.spacesale.befirstonthemoon.database.dao.SectorDao
+import com.spacesale.befirstonthemoon.database.dao.UserDao
 import com.spacesale.befirstonthemoon.database.entity.PlanetEntity
 import com.spacesale.befirstonthemoon.database.entity.PurchaseEntity
 import com.spacesale.befirstonthemoon.database.entity.SectorEntity
@@ -25,6 +26,7 @@ abstract class AppDatabase : RoomDatabase() {
 
     abstract fun planetDao(): PlanetDao
     abstract fun sectorDao(): SectorDao
+    abstract fun userDao(): UserDao
 
     companion object {
         private const val DB_NAME = "beFirstOnTheMoon"

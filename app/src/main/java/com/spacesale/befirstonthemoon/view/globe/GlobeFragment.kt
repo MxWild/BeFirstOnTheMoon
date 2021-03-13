@@ -52,7 +52,7 @@ class GlobeFragment : Fragment() {
 
         binding.buttonProfile.setOnClickListener {
             parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, ProfileFragment.instance(ArrayList()))
+                .replace(R.id.fragment_container, ProfileFragment.instance(1/*todo*/))
                 .addToBackStack(null)
                 .commit()
         }
