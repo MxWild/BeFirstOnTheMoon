@@ -6,6 +6,6 @@ import org.koin.dsl.module
 
 val viewModelModule = module {
     viewModel {
-        PlanetDetailsViewModel()
+        PlanetDetailsViewModel(repository = get())
     }
 }
