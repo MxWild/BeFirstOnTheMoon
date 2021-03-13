@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 import java.lang.Exception
 
 class GlobeViewModel(
-    private val globeRepository: GlobeRepository
+    private val repository: GlobeRepository
 ) : ViewModel() {
 
     private val _mutablePlanet = MutableLiveData<Planet>()
@@ -19,7 +19,7 @@ class GlobeViewModel(
     fun loadPlanetInfo(planetId: Int) {
         viewModelScope.launch {
             try {
-                _mutablePlanet.value = globeRepository.getPlanetById(planetId)
+                _mutablePlanet.value = repository.getPlanetById(planetId)
             } catch (e: Exception) {
                 Log.e(
                     GlobeViewModel::class.java.simpleName,

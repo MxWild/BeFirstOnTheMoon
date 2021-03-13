@@ -8,9 +8,6 @@ import org.koin.dsl.module
 
 val viewModelModule = module {
     viewModel { ProfileViewModel(profileRepository = get()) }
-    viewModel {
-        PlanetDetailsViewModel(repository = get())
-    }
     viewModel { PlanetDetailsViewModel(repository = get()) }
-    viewModel { GlobeViewModel(globeRepository = get()) }
+    viewModel { GlobeViewModel(repository = get()) }
 }
