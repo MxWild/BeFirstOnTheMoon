@@ -7,12 +7,16 @@ import androidx.room.RoomDatabase
 import com.spacesale.befirstonthemoon.database.dao.PlanetDao
 import com.spacesale.befirstonthemoon.database.dao.SectorDao
 import com.spacesale.befirstonthemoon.database.entity.PlanetEntity
+import com.spacesale.befirstonthemoon.database.entity.PurchaseEntity
 import com.spacesale.befirstonthemoon.database.entity.SectorEntity
+import com.spacesale.befirstonthemoon.database.entity.UserEntity
 
 @Database(
     entities = [
         PlanetEntity::class,
-        SectorEntity::class
+        PurchaseEntity::class,
+        SectorEntity::class,
+        UserEntity::class
     ],
     version = 1,
     exportSchema = false
