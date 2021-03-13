@@ -20,7 +20,6 @@ import gov.nasa.worldwind.shape.ShapeAttributes
 import org.koin.android.viewmodel.ext.android.viewModel
 import kotlin.properties.Delegates
 
-
 class GlobeFragment : Fragment() {
 
     private val viewModel: GlobeViewModel by viewModel()
@@ -36,6 +35,7 @@ class GlobeFragment : Fragment() {
         arguments?.let {
             planetId = it.getInt(PARAM_PLANET_ID)
             viewModel.loadPlanetInfo(planetId)
+            viewModel.loadSectors(planetId)
         }
     }
 
@@ -56,6 +56,10 @@ class GlobeFragment : Fragment() {
 
         viewModel.planet.observe(viewLifecycleOwner) {
             showGlobe(planetId)
+        }
+
+        viewModel.sectors.observe(viewLifecycleOwner) {
+            //todo
         }
 
         binding.buttonBack.setOnClickListener {
@@ -129,6 +133,7 @@ class GlobeFragment : Fragment() {
 
     private fun showGlobe(planetId: Int) {
         viewModel.loadPlanetInfo(planetId)
+        viewModel.loadSectors(planetId)
         binding.globe.addView(createWorldWindow())
     }
 
