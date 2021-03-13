@@ -8,7 +8,9 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.spacesale.befirstonthemoon.MainActivity
 import com.spacesale.befirstonthemoon.R
+import com.spacesale.befirstonthemoon.view.details.PlanetDetailsFragment
 
 private const val ARG_PLANET_ID = "planet_id"
 private const val ARG_PLANET_NAME = "planet_name"
@@ -27,7 +29,16 @@ class PlanetFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         arguments?.takeIf { it.containsKey(ARG_PLANET_ID) }?.apply {
             val button: Button = view.findViewById(R.id.select_button)
-            button.text = getInt(ARG_PLANET_ID).toString()
+            button.setOnClickListener {
+                (activity as MainActivity)
+                    .loadFragment(PlanetDetailsFragment.newInstance(getInt(ARG_PLANET_ID)))
+            }
+
+            val image: ImageView = view.findViewById(R.id.planet_image)
+            image.setOnClickListener {
+                (activity as MainActivity)
+                    .loadFragment(PlanetDetailsFragment.newInstance(getInt(ARG_PLANET_ID)))
+            }
         }
         arguments?.takeIf { it.containsKey(ARG_PLANET_NAME) }?.apply {
             val text: TextView = view.findViewById(R.id.planet_name_text)
