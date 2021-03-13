@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,7 +16,7 @@ class ProfileFragment : Fragment() {
 
     private var recycler: RecyclerView? = null
 
-    private var buttonBack: TextView? = null
+    private var buttonBack: ImageView? = null
 
     private var purchases: List<Purchase>? = null
 
@@ -52,7 +53,7 @@ class ProfileFragment : Fragment() {
 
     private fun bindViews(purchases: List<Purchase>) {
         buttonBack?.setOnClickListener {
-            fragmentManager?.popBackStack()
+            parentFragmentManager.popBackStack()
         }
 
         (recycler?.adapter as? ProfileAdapter)?.apply {
