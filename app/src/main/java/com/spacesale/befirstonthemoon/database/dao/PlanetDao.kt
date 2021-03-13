@@ -9,8 +9,11 @@ import com.spacesale.befirstonthemoon.database.entity.PlanetEntity
 @Dao
 interface PlanetDao {
 
+    @Query("SELECT Count(*) FROM planets")
+    suspend fun count(): Int
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(planets: List<PlanetEntity>)
+    suspend fun insertAll(planets: List<PlanetEntity>)
 
     @Query("DELETE FROM planets")
     fun clearAllPlanet(): Int
