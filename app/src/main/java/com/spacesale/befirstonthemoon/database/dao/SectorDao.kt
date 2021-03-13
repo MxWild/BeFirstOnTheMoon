@@ -19,6 +19,9 @@ interface SectorDao {
     @Query("DELETE FROM sector")
     fun clearAllSectors(): Int
 
-    @Query("UPDATE sector set isSale =1 WHERE planetId=:planetId AND ID =:sectorId")
-    suspend fun buySector(planetId: Int,sectorId: Int)
+    @Query("UPDATE sector set isSale = 1 WHERE planetId=:planetId AND ID =:sectorId")
+    suspend fun buySector(planetId: Int, sectorId: Int)
+
+    @Query("SELECT WKT FROM SECTOR WHERE planetId = :planetId")
+    suspend fun getAllWKT(planetId: Int): List<String>
 }
