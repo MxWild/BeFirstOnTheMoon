@@ -9,6 +9,9 @@ import coil.load
 import com.spacesale.befirstonthemoon.R
 import com.spacesale.befirstonthemoon.databinding.FragmentPlanetDetailsBinding
 import com.spacesale.befirstonthemoon.domain.Planet
+import com.spacesale.befirstonthemoon.domain.Purchase
+import com.spacesale.befirstonthemoon.view.profile.ProfileFragment
+import org.koin.android.viewmodel.ext.android.viewModel
 
 
 class PlanetDetailsFragment : Fragment() {
@@ -18,6 +21,9 @@ class PlanetDetailsFragment : Fragment() {
     private var _binding: FragmentPlanetDetailsBinding? = null
 
     private val binding get() = _binding!!
+
+    private val planetDetailsViewModel: PlanetDetailsViewModel by viewModel()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,26 +44,33 @@ class PlanetDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val planet = Planet(
-            1,
-            "Марс",
-            R.drawable.mars_select,
-            R.drawable.ic_marsdetails,
-            R.drawable.mars,
-            "Марс — четвёртая по удалённости от Солнца и седьмая по размеру планета Солнечной системы; масса планеты составляет 10,7 % массы Земли. Названа в честь Марса — древнеримского бога войны, соответствующего древнегреческому Аресу. Иногда Марс называют «красной планетой» из-за красноватого оттенка поверхности, придаваемого ей минералом маггемидом— γ-оксидом железа.",
-            "95,32 % углекислый газ\n2,7 % азот\n1,6 % аргон\n0,145 % кислород\n0,08 % угарный газ\n0,021 % водяной пар\n0,01 % окись азота\n0,00025 % неон",
-            "Масса - 6,39Е23 кг\nРасстояние от Земли - от 55,76 до 401 млн км\nРадиус - 3389,5 км\nТемпература - от −153 °C до +35 °C"
-        )
 
 
-        binding.planetAvatar.load(planet.detailPoster) {
-            crossfade(true)
+
+        planetDetailsViewModel.planetLiveData.observe(this.viewLifecycleOwner) { selectedPlanet ->
+
+            binding.planetAvatar.load(selectedPlanet.detailPoster) {
+                crossfade(true)
+            }
+
+            binding.titleDetails.text = selectedPlanet.name
+            binding.descriptionDetails.text = selectedPlanet.description
+            binding.atmosphereDetails.text = selectedPlanet.atmosphere
+            binding.characteristicsDescription.text = selectedPlanet.characteristics
         }
 
-        binding.titleDetails.text = planet.name
-        binding.descriptionDetails.text = planet.description
-        binding.atmosphereDetails.text = planet.atmosphere
-        binding.characteristicsDescription.text = planet.characteristics
+        binding.backButton.setOnClickListener {
+            fragmentManager?.popBackStack()
+        }
+
+        binding.profileButton.setOnClickListener {
+            fragmentManager?.beginTransaction()?.addToBackStack(null)?.replace(R.id.fragment_container,ProfileFragment.instance(
+                listOf<Purchase>() as ArrayList<Purchase>
+            ))?.commit()
+        }
+
+        planetDetailsViewModel.showPlanet(1)
+
     }
 
     override fun onDestroyView() {

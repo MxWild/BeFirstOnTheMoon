@@ -7,6 +7,27 @@
     android:background="@drawable/bg_details"
     tools:context=".view.details.PlanetDetailsFragment">
 
+    <ImageView
+        android:id="@+id/back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_back_nav"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/profile_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_profile_nav"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/planet_avatar"
@@ -21,26 +42,6 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/ic_marsdetails" />
 
-    <ImageView
-        android:id="@+id/back_button"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/ic_back_nav" />
-
-    <ImageView
-        android:id="@+id/profile_button"
-        android:layout_width="14dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="30dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/ic_profile_nav" />
 
     <TextView
         android:id="@+id/title_details"
@@ -58,6 +59,7 @@
         app:layout_constraintTop_toBottomOf="@id/planet_avatar"
         tools:text="Марс" />
 
+
     <ScrollView
         android:id="@+id/details_scroll_view"
         android:layout_width="0dp"
@@ -72,7 +74,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/description_details"
@@ -94,13 +96,13 @@
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/playfair_display_sc"
+                android:text="Состав атмосферы"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/description_details"
-                android:text="Состав атмосферы" />
+                app:layout_constraintTop_toBottomOf="@id/description_details" />
 
 
             <TextView
@@ -124,13 +126,13 @@
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/playfair_display_sc"
+                android:text="Характеристики"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/atmosphere_details"
-                android:text="Характеристики" />
+                app:layout_constraintTop_toBottomOf="@id/atmosphere_details" />
 
 
             <TextView
@@ -164,5 +166,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/details_scroll_view" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

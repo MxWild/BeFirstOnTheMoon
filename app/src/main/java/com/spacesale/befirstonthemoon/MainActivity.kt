@@ -2,7 +2,7 @@ package com.spacesale.befirstonthemoon
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.spacesale.befirstonthemoon.view.globe.GlobeFragment
+import androidx.fragment.app.Fragment
 import com.spacesale.befirstonthemoon.view.planets.SelectFragment
 
 class MainActivity : AppCompatActivity() {
@@ -13,8 +13,15 @@ class MainActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                    .add(R.id.fragment_container, GlobeFragment.newInstance(1))
+                    .add(R.id.fragment_container, SelectFragment.newInstance())
                     .commit()
         }
+    }
+
+    fun loadFragment(fragment: Fragment){
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 }
