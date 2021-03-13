@@ -1,6 +1,5 @@
 package com.spacesale.befirstonthemoon.view.profile
 
-import android.provider.ContactsContract
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,10 +8,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.spacesale.befirstonthemoon.R
+import com.spacesale.befirstonthemoon.domain.Purchase
 
 class ProfileAdapter : RecyclerView.Adapter<ProfileAdapter.ProfileViewHolder>() {
 
-    //private var profiles = listOf<Profile>()
+    private var purchases = listOf<Purchase>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfileViewHolder {
         val itemView = LayoutInflater.from(parent.context)
@@ -21,20 +21,14 @@ class ProfileAdapter : RecyclerView.Adapter<ProfileAdapter.ProfileViewHolder>() 
     }
 
     override fun onBindViewHolder(holder: ProfileViewHolder, position: Int) {
-        //todo
-        holder.onBind()
+        holder.onBind(purchases[position])
     }
 
-    override fun getItemCount(): Int {
-        //todo
-        return 1
-        //return profiles.size
-    }
+    override fun getItemCount(): Int = purchases.size
 
-    //todo
-    fun bindProfile(/*profiles: List<Profile>*/)
+    fun bindProfile(purchases: List<Purchase>)
     {
-        //this.profiles = profiles
+        this.purchases = purchases
         notifyDataSetChanged()
     }
 
@@ -44,11 +38,10 @@ class ProfileAdapter : RecyclerView.Adapter<ProfileAdapter.ProfileViewHolder>() 
         private val planetName = itemView.findViewById<TextView>(R.id.planet_name)
         private val sectorsName = itemView.findViewById<TextView>(R.id.sectors)
 
-        //todo добвить биндинг дто в холдер
-        fun onBind() {
-            planetImage.load(R.drawable.ic_marsdetails)
-            planetName.text = "Марс"
-            sectorsName.text = "Участок 12364\\nУчасток 24526"
+        fun onBind(purchase: Purchase) {
+            planetImage.load(purchase.planetPicture)
+            planetName.text = purchase.planetName
+            sectorsName.text = purchase.sectorNames
         }
 
     }

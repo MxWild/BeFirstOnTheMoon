@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.spacesale.befirstonthemoon.R
+import com.spacesale.befirstonthemoon.domain.Purchase
 
 class ProfileFragment : Fragment() {
 
@@ -16,22 +17,21 @@ class ProfileFragment : Fragment() {
 
     private var buttonBack: TextView? = null
 
-    //private var sectors: List<Sector>? = null
+    private var purchases: List<Purchase>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_profile, container, false)
-    }
+    ): View? = inflater.inflate(R.layout.fragment_profile, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews(view)
-        //todo
-        //sectors = arguments?.getParcelableArrayList<Sector>(SECTORS)
-        bindViews(/**/)
+        purchases = arguments?.getParcelableArrayList(SECTORS)
+        purchases?.let {
+            bindViews(it)
+        }
     }
 
     override fun onDestroyView() {
@@ -47,27 +47,24 @@ class ProfileFragment : Fragment() {
         recycler = view.findViewById<RecyclerView>(R.id.sectors_list).apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             adapter = ProfileAdapter()
-
         }
     }
 
-    //todo
-    private fun bindViews(/*data: List<Sectors>*/) {
+    private fun bindViews(purchases: List<Purchase>) {
         buttonBack?.setOnClickListener {
             fragmentManager?.popBackStack()
         }
 
         (recycler?.adapter as? ProfileAdapter)?.apply {
-            bindProfile()
+            bindProfile(purchases)
         }
     }
 
     companion object {
 
-        //todo
-        fun instance(/*sectors: List<Sector>*/) = ProfileFragment().apply {
+        fun instance(purchases: ArrayList<Purchase>) = ProfileFragment().apply {
             arguments = Bundle().apply {
-                //putParcelableArrayList(SECTORS, sectors)
+                putParcelableArrayList(SECTORS, purchases)
             }
         }
 
