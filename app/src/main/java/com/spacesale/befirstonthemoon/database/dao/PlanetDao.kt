@@ -16,7 +16,7 @@ interface PlanetDao {
     suspend fun insertAll(planets: List<PlanetEntity>)
 
     @Query("SELECT * FROM planets where planetId=:planetId")
-    fun getPlanetById(planetId: Int): PlanetEntity
+    suspend fun getPlanetById(planetId: Int): PlanetEntity
 
     @Query("DELETE FROM planets")
     fun clearAllPlanet(): Int
