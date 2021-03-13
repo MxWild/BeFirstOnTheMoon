@@ -9,7 +9,8 @@ data class Planet (
     val mainPoster: Int,
     @DrawableRes
     val detailPoster: Int,
-    val texture: String,
+    @DrawableRes
+    val texture: Int,
     val description: String,
     val atmosphere: String,
     val characteristics: String
