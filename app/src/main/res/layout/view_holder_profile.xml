@@ -4,15 +4,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="10dp">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/planet_img"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginStart="10dp"
         android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
         android:src="@drawable/ic_marsdetails"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
@@ -35,6 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:textColor="@color/planet_item_color"
         android:textSize="24sp"
         android:lineSpacingExtra="5dp"
