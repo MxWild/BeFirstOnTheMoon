@@ -2,6 +2,7 @@ package com.spacesale.befirstonthemoon
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.spacesale.befirstonthemoon.view.planets.SelectFragment
 
 class MainActivity : AppCompatActivity() {
 
