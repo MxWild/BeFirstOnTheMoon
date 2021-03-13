@@ -1,4 +1,4 @@
-package com.spacesale.befirstonthemoon.view.globe
+package com.spacesale.befirstonthemoon.view.details
 
 import com.spacesale.befirstonthemoon.database.AppDatabase
 import com.spacesale.befirstonthemoon.database.entity.PlanetEntity
@@ -6,10 +6,10 @@ import com.spacesale.befirstonthemoon.domain.Planet
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class GlobeRepository(private val db: AppDatabase) {
+class PlanetDetailsRepository(private val db: AppDatabase) {
 
-    suspend fun getPlanetById(planetId: Int): Planet = withContext(Dispatchers.IO){
-        convertPlanetEntityToPlanet(db.planetDao().getById(planetId))
+    suspend fun getPlanetById(planetId: Int): Planet = withContext(Dispatchers.IO) {
+         convertPlanetEntityToPlanet(db.planetDao().getById(planetId))
     }
 
     private fun convertPlanetEntityToPlanet(planetEntity: PlanetEntity) = Planet(

@@ -45,27 +45,23 @@ class SelectFragment : Fragment() {
         viewPager = view.findViewById(R.id.pager)
         viewPager.adapter = selectAdapter
 
+        leftArrow = view.findViewById(R.id.left_arrow)
+        rightArrow = view.findViewById(R.id.right_arrow)
+
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
 
-                if (position == 0) setArrowVisibility(true, false)
-                else setArrowVisibility(true, true)
-                if (position == selectAdapter.itemCount - 1) setArrowVisibility(false, false)
-                else setArrowVisibility(false, true)
-            }
-
-            fun setArrowVisibility(isLeft: Boolean, visible: Boolean) {
-                val arrow: ImageView = view.findViewById(if (isLeft) R.id.left_arrow else R.id.right_arrow)
-                arrow.visibility = if (visible) View.VISIBLE else View.GONE
+                leftArrow.visibility =
+                    if (position == 0) View.GONE else View.VISIBLE
+                rightArrow.visibility =
+                    if (position == selectAdapter.itemCount - 1) View.GONE else View.VISIBLE
             }
         })
 
-        leftArrow = view.findViewById(R.id.left_arrow)
         leftArrow.setOnClickListener {
             viewPager.currentItem = viewPager.currentItem - 1
         }
-        rightArrow = view.findViewById(R.id.right_arrow)
         rightArrow.setOnClickListener {
             viewPager.currentItem = viewPager.currentItem + 1
         }

@@ -8,13 +8,14 @@ import androidx.fragment.app.Fragment
 import coil.load
 import com.spacesale.befirstonthemoon.R
 import com.spacesale.befirstonthemoon.databinding.FragmentPlanetDetailsBinding
+import com.spacesale.befirstonthemoon.view.globe.GlobeFragment
 import com.spacesale.befirstonthemoon.view.profile.ProfileFragment
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
 class PlanetDetailsFragment : Fragment() {
 
-    private var planetId: Int? = null
+    private var planetId: Int?=null
 
     private var _binding: FragmentPlanetDetailsBinding? = null
 
@@ -42,9 +43,6 @@ class PlanetDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
-
         planetDetailsViewModel.planetLiveData.observe(this.viewLifecycleOwner) { selectedPlanet ->
 
             binding.planetAvatar.load(selectedPlanet.detailPoster) {
@@ -64,6 +62,13 @@ class PlanetDetailsFragment : Fragment() {
         binding.profileButton.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, ProfileFragment.instance(1/*todo*/))
+                .addToBackStack(null)
+                .commit()
+        }
+
+        binding.buyPartOfPlanet.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, GlobeFragment.newInstance(planetId!!))
                 .addToBackStack(null)
                 .commit()
         }

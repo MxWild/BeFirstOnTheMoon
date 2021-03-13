@@ -22,6 +22,6 @@ interface PlanetDao {
     fun clearAllPlanet(): Int
 
     @Query("SELECT * FROM planets WHERE planetId = :planetId")
-    fun getById(planetId: Int): PlanetEntity
+    suspend fun getById(planetId: Int): PlanetEntity
 
 }
