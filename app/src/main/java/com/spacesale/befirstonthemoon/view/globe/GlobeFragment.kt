@@ -112,13 +112,13 @@ class GlobeFragment : Fragment() {
 
         // Define the normal shape attributes
         val commonAttrs = ShapeAttributes()
-        commonAttrs.interiorColor[1.0f, 1.0f, 0.0f] = 0.5f
+        commonAttrs.interiorColor[1.0f, 1.0f, 0.0f] = 0.05f
         commonAttrs.outlineColor[0.0f, 0.0f, 0.0f] = 1.0f
         commonAttrs.outlineWidth = 3f
 
         // Define the shape attributes used for highlighted countries
         val highlightAttrs = ShapeAttributes()
-        highlightAttrs.interiorColor[1.0f, 1.0f, 1.0f] = 0.5f
+        highlightAttrs.interiorColor[1.0f, 1.0f, 1.0f] = 0.2f
         highlightAttrs.outlineColor[1.0f, 1.0f, 1.0f] = 1.0f
         highlightAttrs.outlineWidth = 5f
 
@@ -144,6 +144,7 @@ class GlobeFragment : Fragment() {
 //        wwd.setBackgroundResource(R.drawable.background_stars)
         wwd.layers.addLayer(BackgroundLayer(moon, null))
         wwd.layers.addLayer(layer)
+        wwd.worldWindowController = PickController(requireContext())
         return wwd
     }
 
