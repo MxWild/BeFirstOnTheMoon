@@ -6,7 +6,5 @@ import org.koin.dsl.module
 
 val repoModule = module {
     single { ProfileRepository(db = get()) }
-}
-val repoModule = module {
     single { PlanetDetailsRepository(db =get()) }
 }
