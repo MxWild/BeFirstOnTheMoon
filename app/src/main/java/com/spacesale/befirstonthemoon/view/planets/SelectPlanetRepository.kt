@@ -1,6 +1,5 @@
 package com.spacesale.befirstonthemoon.view.planets
 
-import android.util.Log
 import com.spacesale.befirstonthemoon.database.AppDatabase
 import com.spacesale.befirstonthemoon.database.entity.PlanetEntity
 import com.spacesale.befirstonthemoon.domain.Planet
@@ -15,7 +14,6 @@ class SelectPlanetRepository(private val db: AppDatabase) {
              val planet = convertPlanetEntityToPlanet(it)
              list.add(planet)
          }
-        Log.e("QWERTY_rep", list.toString())
         return@withContext list
     }
 
