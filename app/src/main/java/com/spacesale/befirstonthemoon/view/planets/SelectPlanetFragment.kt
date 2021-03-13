@@ -15,7 +15,7 @@ private const val ARG_PLANET_ID = "planet_id"
 private const val ARG_PLANET_NAME = "planet_name"
 private const val ARG_PLANET_DRAWABLE = "planet_drawable"
 
-class PlanetFragment : Fragment() {
+class SelectPlanetFragment : Fragment() {
 
     private var _binding: FragmentSelectPlanetBinding? = null
     private val binding get() = _binding!!
@@ -59,7 +59,7 @@ class PlanetFragment : Fragment() {
 
     companion object {
         fun newInstance(position: Int, planets: Map<Int, Planet>): Fragment {
-            val fragment = PlanetFragment()
+            val fragment = SelectPlanetFragment()
             fragment.arguments = Bundle().apply {
                 putInt(ARG_PLANET_ID, position + 1)
                 putString(ARG_PLANET_NAME, planets[position + 1]!!.name)
