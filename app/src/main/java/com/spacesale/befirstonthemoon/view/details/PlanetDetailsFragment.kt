@@ -15,7 +15,6 @@ class PlanetDetailsFragment : Fragment() {
 
     private var planetId: Int? = null
 
-
     private var _binding: FragmentPlanetDetailsBinding? = null
 
     private val binding get() = _binding!!
@@ -25,14 +24,13 @@ class PlanetDetailsFragment : Fragment() {
         arguments?.let {
             planetId = it.getInt(PARAM_PLANET_ID)
         }
-
     }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentPlanetDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -61,7 +59,6 @@ class PlanetDetailsFragment : Fragment() {
         binding.atmosphereDetails.text = planet.atmosphere
         binding.characteristicsDescription.text = planet.characteristics
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
