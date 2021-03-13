@@ -9,19 +9,22 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.spacesale.befirstonthemoon.R
 import com.spacesale.befirstonthemoon.domain.Planet
+import org.koin.android.viewmodel.ext.android.viewModel
 
-val tempPlanets = arrayOf(
+/*val tempPlanets = arrayOf(
     Planet(0, "Меркурий", R.drawable.mercury_select,
         R.drawable.ic_marsdetails, R.drawable.mars, "", "", ""),
     Planet(1, "Луна", R.drawable.moon_select,
         R.drawable.ic_marsdetails, R.drawable.mars, "", "", ""),
     Planet(2, "Марс", R.drawable.mars_select,
-        R.drawable.ic_marsdetails, R.drawable.mars, "", "", ""))
+        R.drawable.ic_marsdetails, R.drawable.mars, "", "", ""))*/
 
 data class PlanetInfo(val name: String, val image: Int)
 private val mPlanets: MutableMap<Int, PlanetInfo> = mutableMapOf()
 
 class SelectFragment : Fragment() {
+    private val selectPlanetViewModel: SelectPlanetViewModel by viewModel()
+
     private lateinit var selectAdapter: SelectAdapter
     private lateinit var viewPager: ViewPager2
 
@@ -37,8 +40,11 @@ class SelectFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        tempPlanets.forEach {
-            mPlanets[it.id] = PlanetInfo(it.name, it.mainPoster)
+
+        selectPlanetViewModel.planetLiveData.observe(this.viewLifecycleOwner) { map: Map<Int, Planet>? ->
+            map!!.forEach {
+                mPlanets[it.key] = PlanetInfo(it.value.name, it.value.mainPoster)
+            }
         }
 
         selectAdapter = SelectAdapter(this, mPlanets)
