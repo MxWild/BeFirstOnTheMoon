@@ -3,7 +3,7 @@ package com.spacesale.befirstonthemoon
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.spacesale.befirstonthemoon.view.planets.SelectFragment
+import com.spacesale.befirstonthemoon.view.SplashFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                    .add(R.id.fragment_container, SelectFragment.newInstance())
+                    .add(R.id.fragment_container, SplashFragment.newInstance())
                     .commit()
         }
     }

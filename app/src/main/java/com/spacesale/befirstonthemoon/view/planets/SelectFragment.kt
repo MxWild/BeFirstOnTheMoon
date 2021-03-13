@@ -12,9 +12,9 @@ import com.spacesale.befirstonthemoon.R
 import com.spacesale.befirstonthemoon.domain.Planet
 import org.koin.android.viewmodel.ext.android.viewModel
 
-private val mPlanets: MutableMap<Int, Planet> = mutableMapOf()
-
 class SelectFragment : Fragment() {
+    private val mPlanets: MutableMap<Int, Planet> = mutableMapOf()
+
     private val selectPlanetViewModel: SelectPlanetViewModel by viewModel()
 
     private lateinit var selectAdapter: SelectAdapter
