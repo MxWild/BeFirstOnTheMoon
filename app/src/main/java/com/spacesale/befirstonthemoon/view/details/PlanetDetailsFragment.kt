@@ -1,15 +1,13 @@
 package com.spacesale.befirstonthemoon.view.details
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import coil.load
 import com.spacesale.befirstonthemoon.R
 import com.spacesale.befirstonthemoon.databinding.FragmentPlanetDetailsBinding
-import com.spacesale.befirstonthemoon.domain.Planet
-import com.spacesale.befirstonthemoon.domain.Purchase
 import com.spacesale.befirstonthemoon.view.profile.ProfileFragment
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -60,13 +58,14 @@ class PlanetDetailsFragment : Fragment() {
         }
 
         binding.backButton.setOnClickListener {
-            fragmentManager?.popBackStack()
+            parentFragmentManager.popBackStack()
         }
 
         binding.profileButton.setOnClickListener {
-            fragmentManager?.beginTransaction()?.addToBackStack(null)?.replace(R.id.fragment_container,ProfileFragment.instance(
-                listOf<Purchase>() as ArrayList<Purchase>
-            ))?.commit()
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, ProfileFragment.instance(ArrayList()))
+                .addToBackStack(null)
+                .commit()
         }
 
         planetDetailsViewModel.showPlanet(1)
