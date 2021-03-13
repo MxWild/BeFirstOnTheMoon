@@ -63,7 +63,10 @@ class GlobeFragment : Fragment() {
         binding.buttonBuy.setOnClickListener {
             //TODO добавить покупку выбранного участка по кнопке
             Toast
-                .makeText(context, "Поздравляю, вы купили участок на марте", Toast.LENGTH_LONG)
+                .makeText(
+                    context,
+                    String.format(getString(R.string.buy_toast), planetId.toString()),
+                    Toast.LENGTH_LONG)
                 .show()
         }
     }
