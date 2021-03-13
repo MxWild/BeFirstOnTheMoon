@@ -60,9 +60,9 @@ class PlanetFragment : Fragment() {
         fun newInstance(position: Int, planets: Map<Int, PlanetInfo>): Fragment {
             val fragment = PlanetFragment()
             fragment.arguments = Bundle().apply {
-                putInt(ARG_PLANET_ID, position)
-                putString(ARG_PLANET_NAME, planets[position]!!.name)
-                putInt(ARG_PLANET_DRAWABLE, planets[position]!!.image)
+                putInt(ARG_PLANET_ID, position + 1)
+                putString(ARG_PLANET_NAME, planets[position + 1]!!.name)
+                putInt(ARG_PLANET_DRAWABLE, planets[position + 1]!!.image)
             }
             return fragment
         }

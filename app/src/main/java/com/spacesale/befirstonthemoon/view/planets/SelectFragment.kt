@@ -1,6 +1,7 @@
 package com.spacesale.befirstonthemoon.view.planets
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,6 +32,11 @@ class SelectFragment : Fragment() {
     private lateinit var leftArrow: ImageView
     private lateinit var rightArrow: ImageView
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        selectPlanetViewModel.loadPlanets()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -41,11 +47,23 @@ class SelectFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        selectPlanetViewModel.planetLiveData.observe(this.viewLifecycleOwner) { map: Map<Int, Planet>? ->
-            map!!.forEach {
-                mPlanets[it.key] = PlanetInfo(it.value.name, it.value.mainPoster)
-            }
+        val list: MutableList<Planet> = mutableListOf()
+        selectPlanetViewModel.planetLiveData.value?.let {
+            Log.e("QWERTY_it", it.toString())
+            list.addAll(it)
         }
+        /*selectPlanetViewModel.planetLiveData.observe(viewLifecycleOwner) {
+            selectPlanetViewModel.loadPlanets()
+            selectPlanetViewModel.planetLiveData.value?.let {
+                Log.e("QWERTY_it", it.toString())
+                list.addAll(it)
+            }
+        }*/
+        /*val list = selectPlanetViewModel.planetLiveData.value?.let { it }*/
+        Log.e("QWERTY", list.toString())
+        /*list!!.forEach {
+            mPlanets[it.id] = PlanetInfo(it.name, it.mainPoster)
+        }*/
 
         selectAdapter = SelectAdapter(this, mPlanets)
         viewPager = view.findViewById(R.id.pager)

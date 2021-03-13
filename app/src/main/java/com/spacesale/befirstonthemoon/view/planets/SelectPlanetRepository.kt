@@ -1,5 +1,6 @@
 package com.spacesale.befirstonthemoon.view.planets
 
+import android.util.Log
 import com.spacesale.befirstonthemoon.database.AppDatabase
 import com.spacesale.befirstonthemoon.database.entity.PlanetEntity
 import com.spacesale.befirstonthemoon.domain.Planet
@@ -8,13 +9,14 @@ import kotlinx.coroutines.withContext
 
 class SelectPlanetRepository(private val db: AppDatabase) {
 
-    suspend fun getPlanets(): Map<Int, Planet> = withContext(Dispatchers.IO) {
-        val map: MutableMap<Int, Planet> = mutableMapOf()
+    suspend fun getPlanets(): List<Planet> = withContext(Dispatchers.IO) {
+        val list: MutableList<Planet> = mutableListOf()
          db.planetDao().getAll().forEach {
              val planet = convertPlanetEntityToPlanet(it)
-             map.put(planet.id, planet)
+             list.add(planet)
          }
-        return@withContext map
+        Log.e("QWERTY_rep", list.toString())
+        return@withContext list
     }
 
     private fun convertPlanetEntityToPlanet(planetEntity: PlanetEntity) = Planet(
