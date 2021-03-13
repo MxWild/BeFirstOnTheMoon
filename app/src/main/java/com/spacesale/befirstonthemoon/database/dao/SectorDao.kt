@@ -1,9 +1,6 @@
 package com.spacesale.befirstonthemoon.database.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.spacesale.befirstonthemoon.database.entity.PlanetEntity
 import com.spacesale.befirstonthemoon.database.entity.SectorEntity
 
@@ -21,4 +18,7 @@ interface SectorDao {
 
     @Query("DELETE FROM sector")
     fun clearAllSectors(): Int
+
+    @Query("UPDATE sector set isSale =1 WHERE planetId=:planetId AND ID =:sectorId")
+    suspend fun buySector(planetId: Int,sectorId: Int)
 }

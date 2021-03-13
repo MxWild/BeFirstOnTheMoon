@@ -75,6 +75,7 @@ class GlobeFragment : Fragment() {
 
         binding.buttonBuy.setOnClickListener {
             //TODO добавить покупку выбранного участка по кнопке
+            viewModel.buySector(planetId,1)
             Toast
                 .makeText(
                     context,
@@ -84,6 +85,7 @@ class GlobeFragment : Fragment() {
                 .show()
         }
     }
+
 
     override fun onResume() {
         super.onResume()

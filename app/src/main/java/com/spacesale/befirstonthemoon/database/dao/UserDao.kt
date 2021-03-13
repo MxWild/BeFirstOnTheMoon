@@ -12,6 +12,9 @@ interface UserDao {
     @Insert
     fun insert(user: UserEntity)
 
+    @Insert
+    suspend fun insertPurchase(purchase: PurchaseEntity)
+
     @Query("SELECT * FROM users WHERE userId = :userId")
     fun getUserById(userId: Int): UserEntity
 
