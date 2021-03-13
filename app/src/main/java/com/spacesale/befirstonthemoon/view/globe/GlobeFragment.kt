@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.spacesale.befirstonthemoon.R
 import com.spacesale.befirstonthemoon.databinding.FragmentGlobeBinding
+import com.spacesale.befirstonthemoon.domain.Planet
 import com.spacesale.befirstonthemoon.view.profile.ProfileFragment
 import gov.nasa.worldwind.WorldWind
 import gov.nasa.worldwind.WorldWindow
@@ -27,6 +28,7 @@ class GlobeFragment : Fragment() {
 
     private lateinit var wwd: WorldWindow
     private var planetId by Delegates.notNull<Int>()
+    private var planet: Planet? = null
     private var _binding: FragmentGlobeBinding? = null
     private val binding get() = _binding!!
 
@@ -56,6 +58,7 @@ class GlobeFragment : Fragment() {
 
         viewModel.planet.observe(viewLifecycleOwner) {
             showGlobe(planetId)
+            planet = it
         }
 
         viewModel.sectors.observe(viewLifecycleOwner) {
@@ -79,7 +82,7 @@ class GlobeFragment : Fragment() {
             Toast
                 .makeText(
                     context,
-                    String.format(getString(R.string.buy_toast), planetId.toString()),
+                    String.format(getString(R.string.buy_toast), planet?.name),
                     Toast.LENGTH_LONG
                 )
                 .show()
