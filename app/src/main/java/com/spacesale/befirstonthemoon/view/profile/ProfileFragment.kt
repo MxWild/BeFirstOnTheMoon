@@ -5,11 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.spacesale.befirstonthemoon.R
 import com.spacesale.befirstonthemoon.databinding.FragmentProfileBinding
 import com.spacesale.befirstonthemoon.domain.Purchase
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -36,7 +34,7 @@ class ProfileFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initViews(view)
+        initViews()
 
         arguments?.getInt(USER_ID)?.let { userId ->
             profileViewModel.purchasesLiveData.observe(this.viewLifecycleOwner) {
@@ -54,7 +52,7 @@ class ProfileFragment : Fragment() {
         super.onDestroyView()
     }
 
-    private fun initViews(view: View) {
+    private fun initViews() {
         buttonBack = binding.back
 
         recycler = binding.sectorsList.apply {
