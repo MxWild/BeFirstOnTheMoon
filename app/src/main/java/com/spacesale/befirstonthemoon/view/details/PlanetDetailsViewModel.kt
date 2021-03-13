@@ -13,7 +13,7 @@ class PlanetDetailsViewModel() : ViewModel() {
         get() = _planetLiveData
 
     fun showPlanet(
-        //planetId: Int
+        planetId: Int
     ) {
 
         val planet = Planet(
