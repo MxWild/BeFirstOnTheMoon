@@ -10,7 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.spacesale.befirstonthemoon.R
+import com.spacesale.befirstonthemoon.databinding.FragmentProfileBinding
 import com.spacesale.befirstonthemoon.domain.Purchase
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class ProfileFragment : Fragment() {
 
@@ -18,21 +20,31 @@ class ProfileFragment : Fragment() {
 
     private var buttonBack: ImageView? = null
 
-    private var purchases: List<Purchase>? = null
+    private var _binding: FragmentProfileBinding? = null
+
+    private val binding get() = _binding!!
+
+    private val profileViewModel: ProfileViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_profile, container, false)
-
+    ): View? {
+        _binding = FragmentProfileBinding.inflate(inflater, container, false)
+        return binding.root
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews(view)
-        purchases = arguments?.getParcelableArrayList(SECTORS)
-        purchases?.let {
-            bindViews(it)
+
+        arguments?.getInt(USER_ID)?.let { userId ->
+            profileViewModel.purchasesLiveData.observe(this.viewLifecycleOwner) {
+                bindViews(it)
+            }
+            profileViewModel.showPurchases(userId)
         }
+
     }
 
     override fun onDestroyView() {
@@ -43,9 +55,9 @@ class ProfileFragment : Fragment() {
     }
 
     private fun initViews(view: View) {
-        buttonBack = view.findViewById(R.id.back)
+        buttonBack = binding.back
 
-        recycler = view.findViewById<RecyclerView>(R.id.sectors_list).apply {
+        recycler = binding.sectorsList.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             adapter = ProfileAdapter()
         }
@@ -63,13 +75,13 @@ class ProfileFragment : Fragment() {
 
     companion object {
 
-        fun instance(purchases: ArrayList<Purchase>) = ProfileFragment().apply {
+        fun instance(userId: Int) = ProfileFragment().apply {
             arguments = Bundle().apply {
-                putParcelableArrayList(SECTORS, purchases)
+                putInt(USER_ID, userId)
             }
         }
 
-        private const val SECTORS = "SECTORS"
+        private const val USER_ID = "SECTORS"
 
     }
 

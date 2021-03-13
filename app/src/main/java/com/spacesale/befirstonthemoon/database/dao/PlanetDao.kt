@@ -15,6 +15,9 @@ interface PlanetDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(planets: List<PlanetEntity>)
 
+    @Query("SELECT * FROM planets where planetId=:planetId")
+    suspend fun getPlanetById(planetId: Int): PlanetEntity
+
     @Query("DELETE FROM planets")
     fun clearAllPlanet(): Int
 

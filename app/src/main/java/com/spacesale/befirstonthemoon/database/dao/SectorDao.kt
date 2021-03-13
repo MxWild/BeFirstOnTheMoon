@@ -13,8 +13,11 @@ interface SectorDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(sectors: List<SectorEntity>)
 
-    @Query("SELECT * FROM SECTOR WHERE planetId = :planetId")
+    @Query("SELECT * FROM sector WHERE planetId = :planetId")
     fun getSectorsByPlanetId(planetId: Int): List<SectorEntity>
+
+    @Query("SELECT * FROM sector WHERE planetId = :planetId AND sectorId = :sectorId")
+    fun getSectorsByPlanetIdAndSectorId(planetId: Int, sectorId: Int): List<SectorEntity>
 
     @Query("DELETE FROM sector")
     fun clearAllSectors(): Int
