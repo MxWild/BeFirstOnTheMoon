@@ -6,8 +6,6 @@ import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val viewModelModule = module {
-    viewModel {
-        PlanetDetailsViewModel(repository = get())
-        SelectPlanetViewModel(repository = get())
-    }
+    viewModel { PlanetDetailsViewModel(repository = get()) }
+    viewModel { SelectPlanetViewModel(repository = get()) }
 }

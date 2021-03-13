@@ -5,8 +5,6 @@ import com.spacesale.befirstonthemoon.view.planets.SelectPlanetRepository
 import org.koin.dsl.module
 
 val repoModule = module {
-    single {
-        PlanetDetailsRepository(db =get())
-        SelectPlanetRepository(db =get())
-    }
+    single { PlanetDetailsRepository(db =get()) }
+    single { SelectPlanetRepository(db =get()) }
 }
