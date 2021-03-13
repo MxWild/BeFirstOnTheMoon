@@ -9,7 +9,7 @@ class ProfileRepository(private val db: AppDatabase) {
 
     suspend fun getPurchasesByUser(userId: Int): List<Purchase> {
         val purchases: MutableList<Purchase> = mutableListOf()
-        var planetsIds: List<Int> = emptyList()
+        var planetsIds: List<Int>
         return withContext(Dispatchers.IO) {
             val purchaseEntities = db.userDao().getAllPurchase(userId)
 
@@ -20,7 +20,7 @@ class ProfileRepository(private val db: AppDatabase) {
 
             planetsIds.distinct().forEach { planetId ->
                 val planetEntity = db.planetDao().getPlanetById(planetId)
-                var sectors = ""
+                var sectors: String
                 sectors = purchaseEntities
                     .filter { it.planetId == planetId }
                     .map { "Участок " + it.sectorId }
