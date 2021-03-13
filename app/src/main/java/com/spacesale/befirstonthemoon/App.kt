@@ -1,6 +1,8 @@
 package com.spacesale.befirstonthemoon
 
 import android.app.Application
+import com.spacesale.befirstonthemoon.database.AppDatabase
+import com.spacesale.befirstonthemoon.database.DatabaseStorage
 import com.spacesale.befirstonthemoon.di.databaseModule
 import com.spacesale.befirstonthemoon.di.repoModule
 import com.spacesale.befirstonthemoon.di.viewModelModule
@@ -16,6 +18,8 @@ class App : Application() {
             androidContext(this@App)
             modules(listOf(databaseModule, repoModule, viewModelModule))
         }
+
+        DatabaseStorage(applicationContext, AppDatabase(applicationContext)).createMockData()
     }
 
 }
