@@ -1,21 +1,19 @@
 package com.spacesale.befirstonthemoon.view.planets
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.spacesale.befirstonthemoon.R
 import com.spacesale.befirstonthemoon.domain.Planet
-import org.koin.android.viewmodel.ext.android.viewModel
 
-class SelectFragment : Fragment() {
-    private val mPlanets: MutableMap<Int, Planet> = mutableMapOf()
+class SelectFragment(planets: Map<Int, Planet>) : Fragment() {
 
-    private val selectPlanetViewModel: SelectPlanetViewModel by viewModel()
+    private val mPlanets: Map<Int, Planet> = planets
 
     private lateinit var selectAdapter: SelectAdapter
     private lateinit var viewPager: ViewPager2
@@ -33,13 +31,10 @@ class SelectFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        selectPlanetViewModel.planetLiveData.observe(viewLifecycleOwner) { planets ->
-            Log.e("QWERTY_it", planets.toString())
-            planets.forEach {
-                mPlanets[it.id] = it
-            }
+        if (mPlanets.isEmpty()) {
+            Toast.makeText(context, "Перезапустите", Toast.LENGTH_LONG).show()
+            return
         }
-        selectPlanetViewModel.loadPlanets()
 
         selectAdapter = SelectAdapter(this, mPlanets)
         viewPager = view.findViewById(R.id.pager)
@@ -68,6 +63,6 @@ class SelectFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance() = SelectFragment()
+        fun newInstance(planets: Map<Int, Planet>) = SelectFragment(planets)
     }
 }

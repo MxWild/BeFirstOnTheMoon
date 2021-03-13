@@ -16,9 +16,7 @@ class SelectPlanetViewModel(private val repository: SelectPlanetRepository) : Vi
     fun loadPlanets() {
         viewModelScope.launch {
                 try {
-                    Log.e("QWERTY_VM", "try")
                     _planetLiveData.value = repository.getPlanets()
-                    Log.e("QWERTY_VM", _planetLiveData.value.toString())
                 } catch (e: Exception) {
                     Log.e(
                         SelectPlanetViewModel::class.java.simpleName,

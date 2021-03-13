@@ -14,9 +14,16 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.spacesale.befirstonthemoon.MainActivity
 import com.spacesale.befirstonthemoon.R
+import com.spacesale.befirstonthemoon.domain.Planet
 import com.spacesale.befirstonthemoon.view.planets.SelectFragment
+import com.spacesale.befirstonthemoon.view.planets.SelectPlanetViewModel
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class SplashFragment : Fragment() {
+
+    private val mPlanets: MutableMap<Int, Planet> = mutableMapOf()
+
+    private val selectPlanetViewModel: SelectPlanetViewModel by viewModel()
 
     private lateinit var catImage: ImageView
     private lateinit var appName: TextView
@@ -35,6 +42,13 @@ class SplashFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        selectPlanetViewModel.planetLiveData.observe(viewLifecycleOwner) { planets ->
+            planets.forEach {
+                mPlanets[it.id] = it
+            }
+        }
+        selectPlanetViewModel.loadPlanets()
+
         appName = view.findViewById(R.id.app_name)
         catImage = view.findViewById(R.id.cat_image)
         cometLeft = view.findViewById(R.id.comet_left)
@@ -44,7 +58,7 @@ class SplashFragment : Fragment() {
 
         object : CountDownTimer(5000, 1000) {
             override fun onFinish() {
-                (activity as MainActivity).loadFragment(SelectFragment.newInstance())
+                (activity as MainActivity).loadFragment(SelectFragment.newInstance(mPlanets))
             }
             override fun onTick(millisUntilFinished: Long) {}
         }.start()
