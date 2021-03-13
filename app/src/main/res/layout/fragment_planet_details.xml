@@ -161,7 +161,7 @@
         android:layout_width="237dp"
         android:layout_height="64dp"
         android:layout_marginVertical="10dp"
-        android:text="Покупка"
+        android:text="@string/buy_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

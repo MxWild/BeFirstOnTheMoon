@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">BeFirstOnTheMoon</string>
 
+    <string name="select_button">Выбрать</string>
+    <string name="buy_button">Покупка</string>
+    <string name="buy_toast">Поздравляем с покупкой на планете %s!</string>
     <string name="profile_title_screen">Мои покупки</string>
 
 </resources>
