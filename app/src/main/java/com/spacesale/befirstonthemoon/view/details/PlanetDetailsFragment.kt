@@ -20,6 +20,9 @@ class PlanetDetailsFragment : Fragment() {
 
     private val binding get() = _binding!!
 
+    //private val planetDetailsViewModel: PlanetDetailsViewModel()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -50,7 +53,6 @@ class PlanetDetailsFragment : Fragment() {
             "95,32 % углекислый газ\n2,7 % азот\n1,6 % аргон\n0,145 % кислород\n0,08 % угарный газ\n0,021 % водяной пар\n0,01 % окись азота\n0,00025 % неон",
             "Масса - 6,39Е23 кг\nРасстояние от Земли - от 55,76 до 401 млн км\nРадиус - 3389,5 км\nТемпература - от −153 °C до +35 °C"
         )
-
 
         binding.planetAvatar.load(planet.detailPoster) {
             crossfade(true)
