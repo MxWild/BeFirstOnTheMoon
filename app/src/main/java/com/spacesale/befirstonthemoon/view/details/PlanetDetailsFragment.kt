@@ -47,7 +47,7 @@ class PlanetDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        planetDetailsViewModel.showPlanet(1)
+
 
         planetDetailsViewModel.planetLiveData.observe(this.viewLifecycleOwner) { selectedPlanet ->
 
@@ -70,6 +70,8 @@ class PlanetDetailsFragment : Fragment() {
                 listOf<Purchase>() as ArrayList<Purchase>
             ))?.commit()
         }
+
+        planetDetailsViewModel.showPlanet(1)
 
     }
 
