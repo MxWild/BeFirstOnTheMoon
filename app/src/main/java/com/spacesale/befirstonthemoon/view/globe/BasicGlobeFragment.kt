@@ -1,4 +1,4 @@
-package com.spacesale.befirstonthemoon
+package com.spacesale.befirstonthemoon.view.globe
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
+import com.spacesale.befirstonthemoon.R
 import gov.nasa.worldwind.WorldWindow
 import gov.nasa.worldwind.layer.BackgroundLayer
 import gov.nasa.worldwind.render.ImageSource
