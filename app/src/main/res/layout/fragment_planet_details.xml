@@ -1,94 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="@drawable/bg_details"
     tools:context=".PlanetDetailsFragment">
 
+
+    <ImageView
+        android:id="@+id/planet_avatar"
+        android:layout_width="280dp"
+        android:layout_height="280dp"
+        android:layout_marginTop="18dp"
+        android:foregroundGravity="center_horizontal"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toTopOf="@id/title_details"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_marsdetails" />
+
+    <ImageView
+        android:id="@+id/back_button"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_back_nav" />
+
+    <ImageView
+        android:id="@+id/profile_button"
+        android:layout_width="14dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_profile_nav" />
+
+    <TextView
+        android:id="@+id/title_details"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/playfair_display_sc"
+        android:textColor="@color/black"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/details_scroll_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/planet_avatar"
+        tools:text="Марс" />
+
     <ScrollView
-        android:layout_width="match_parent"
+        android:id="@+id/details_scroll_view"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:orientation="vertical"
-        android:layout_weight="1"
+        android:layout_marginTop="10dp"
         android:fillViewport="true"
-        >
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/buy_part_of_planet"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_details">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-
-            <ImageView
-                android:id="@+id/planet_background"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@drawable/bg_details" />
-
-            <ImageView
-                android:id="@+id/planet_avatar"
-                android:layout_width="280dp"
-                android:layout_height="280dp"
-                android:layout_marginTop="64dp"
-                android:foregroundGravity="center_horizontal"
-                android:scaleType="centerCrop"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@drawable/ic_marsdetails" />
-
-            <ImageView
-                android:id="@+id/back_button"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="64dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@drawable/ic_back_nav" />
-
-            <ImageView
-                android:id="@+id/profile_button"
-                android:layout_width="14dp"
-                android:layout_height="20dp"
-                android:layout_marginTop="64dp"
-                android:layout_marginEnd="20dp"
-                android:scaleType="centerCrop"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@drawable/ic_profile_nav" />
-
-            <TextView
-                android:id="@+id/title_details"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="4dp"
-                android:textColor="@color/black"
-                android:textSize="32sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/description_details"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/planet_avatar"
-                tools:text="Марс" />
 
             <TextView
                 android:id="@+id/description_details"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="10dp"
+                android:fontFamily="@font/playfair_display_sc"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/title_details"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:text="Марс — четвёртая по удалённости от Солнца и седьмая по размеру планета Солнечной системы; масса планеты составляет 10,7 % массы Земли. Названа в честь Марса — древнеримского бога войны, соответствующего древнегреческому Аресу. Иногда Марс называют «красной планетой» из-за красноватого оттенка поверхности, придаваемого ей минералом маггемидом— γ-оксидом железа." />
 
             <TextView
@@ -97,13 +93,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="20dp"
+                android:fontFamily="@font/playfair_display_sc"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/description_details"
-                tools:text="Состав атмосферы" />
+                android:text="Состав атмосферы" />
 
 
             <TextView
@@ -112,6 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="10dp"
+                android:fontFamily="@font/playfair_display_sc"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -125,13 +123,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="20dp"
+                android:fontFamily="@font/playfair_display_sc"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/atmosphere_details"
-                tools:text="Характеристики" />
+                android:text="Характеристики" />
 
 
             <TextView
@@ -140,14 +139,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="10dp"
+                android:fontFamily="@font/playfair_display_sc"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/characteristics_title"
                 tools:text="Масса - 6,39Е23 кг\nРасстояние от Земли - от 55,76 до 401 млн км\nРадиус - 3389,5 км\nТемпература - от −153 °C до +35 °C" />
-
-
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -158,11 +156,13 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buy_part_of_planet"
         style="@style/ButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="237dp"
+        android:layout_height="64dp"
         android:layout_marginVertical="10dp"
-        android:gravity="center_horizontal"
-        android:layout_gravity="center_horizontal"
-        android:text="Покупка" />
+        android:text="Покупка"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/details_scroll_view" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
