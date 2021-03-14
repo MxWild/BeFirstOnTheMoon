@@ -75,12 +75,21 @@ class GlobeUtils {
             Position.fromDegrees(59.7, -95.0, 0.0),
         )
 
-        val poly1 = getPolygonAttr(positions1, "Sector 1")
-        val poly2 = getPolygonAttr(positions2, "Sector 2")
-        val poly3 = getPolygonAttr(positions3, "Sector 3")
-        val poly4 = getPolygonAttr(positions4, "Sector 4")
-        val poly5 = getPolygonAttr(positions5, "Sector 5")
-        val poly6 = getPolygonAttr(positions6, "Sector 6")
+        val positions7 = listOf<Position>(
+            Position.fromDegrees(159.9, -105.34, 0.0),
+            Position.fromDegrees(164.0, -110.57, 0.0),
+            Position.fromDegrees(169.0, -110.61, 0.0),
+            Position.fromDegrees(164.7, -90.0, 0.0),
+            Position.fromDegrees(159.7, -95.0, 0.0),
+        )
+
+        val poly1 = getPolygonAttr(positions1, "Sector 1 10_000_000")
+        val poly2 = getPolygonAttr(positions2, "Sector 2 18_000_000")
+        val poly3 = getPolygonAttr(positions3, "Sector 3 9_999_009")
+        val poly4 = getPolygonAttr(positions4, "Sector 4 25_000_025")
+        val poly5 = getPolygonAttr(positions5, "Sector 5 17_500_000")
+        val poly6 = getPolygonAttr(positions6, "Sector 6 14_450_000")
+        val poly7 = getPolygonAttr(positions7, "Sector 7 13_200_100")
 
         allPolygons.add(poly1)
         allPolygons.add(poly2)
@@ -88,6 +97,7 @@ class GlobeUtils {
         allPolygons.add(poly4)
         allPolygons.add(poly5)
         allPolygons.add(poly6)
+        allPolygons.add(poly7)
 
         return allPolygons
     }
