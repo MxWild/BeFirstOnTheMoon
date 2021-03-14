@@ -11,14 +11,11 @@ import com.spacesale.befirstonthemoon.R
 import com.spacesale.befirstonthemoon.databinding.FragmentGlobeBinding
 import com.spacesale.befirstonthemoon.domain.Planet
 import com.spacesale.befirstonthemoon.view.profile.ProfileFragment
-import gov.nasa.worldwind.WorldWind
 import gov.nasa.worldwind.WorldWindow
-import gov.nasa.worldwind.geom.Position
 import gov.nasa.worldwind.layer.BackgroundLayer
 import gov.nasa.worldwind.layer.RenderableLayer
 import gov.nasa.worldwind.render.ImageSource
 import gov.nasa.worldwind.shape.Polygon
-import gov.nasa.worldwind.shape.ShapeAttributes
 import org.koin.android.viewmodel.ext.android.viewModel
 import kotlin.properties.Delegates
 
