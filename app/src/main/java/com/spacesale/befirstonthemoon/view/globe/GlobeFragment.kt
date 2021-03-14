@@ -32,12 +32,14 @@ class GlobeFragment : Fragment() {
     private var _binding: FragmentGlobeBinding? = null
     private val binding get() = _binding!!
 
+    private var polygons: List<Polygon> = emptyList()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             planetId = it.getInt(PARAM_PLANET_ID)
             viewModel.loadPlanetInfo(planetId)
-            viewModel.loadSectors(planetId)
+            //viewModel.loadSectors(planetId)
         }
     }
 
@@ -54,16 +56,17 @@ class GlobeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        showPolygons()
-
         viewModel.planet.observe(viewLifecycleOwner) {
             showGlobe(planetId)
             planet = it
         }
 
-        viewModel.sectors.observe(viewLifecycleOwner) {
-            //todo
+        viewModel.sectors.observe(viewLifecycleOwner) { sectors ->
+            polygons = PolygonConverter().converterDbToPolygons(sectors.map { it.WKT })
+            showPolygons()
         }
+
+        viewModel.loadSectors(planetId)
 
         binding.buttonBack.setOnClickListener {
             parentFragmentManager.popBackStack()
@@ -107,12 +110,12 @@ class GlobeFragment : Fragment() {
 
     private fun showPolygons() {
         //TODO обновление данных с полигонами из обсервера
-//        layer.addAllRenderables(listOf(poly))
+        layer.addAllRenderables(polygons)
     }
 
     private fun showGlobe(planetId: Int) {
         viewModel.loadPlanetInfo(planetId)
-        viewModel.loadSectors(planetId)
+        //viewModel.loadSectors(planetId)
         binding.globe.addView(createWorldWindow())
     }
 
