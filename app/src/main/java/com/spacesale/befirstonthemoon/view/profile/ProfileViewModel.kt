@@ -20,19 +20,6 @@ class ProfileViewModel(private val profileRepository: ProfileRepository ) : View
             get() = _purchasesLiveData
 
     fun showPurchases(userId: Int) {
-        /*val purchases: List<Purchase> = listOf(
-            Purchase(
-                planetPicture = R.drawable.moon_details_pic,
-                planetName = "Луна",
-                sectorNames = "Участок 123\nУчасток 234\nУчасток 345"
-            ),
-            Purchase(
-                planetPicture = R.drawable.mars_details_pic,
-                planetName = "Марс",
-                sectorNames = "Участок 34453\nУчасток 424324"
-            )
-        )*/
-
         viewModelScope.launch {
             try {
                 _purchasesLiveData.value = profileRepository.getPurchasesByUser(userId)

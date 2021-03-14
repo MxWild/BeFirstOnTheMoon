@@ -43,12 +43,12 @@ class GlobeRepository(private val db: AppDatabase) {
     }
 
     private fun convertSectorEntityToSector(sectorEntity: SectorEntity) = Sector(
-        sectorId = sectorEntity.ID,
+        sectorId = sectorEntity.id,
         isSale = sectorEntity.isSale,
         price = sectorEntity.price,
-        WKT = sectorEntity.WKT,
-        LAYER = sectorEntity.LAYER,
-        COUNTRY_NA = sectorEntity.COUNTRY_NA
+        wkt = sectorEntity.wkt,
+        layer = sectorEntity.layer,
+        countryNa = sectorEntity.countryNa
     )
 
 }

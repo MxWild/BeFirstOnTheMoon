@@ -84,7 +84,7 @@ class GlobeFragment : Fragment() {
 
         binding.buttonProfile.setOnClickListener {
             parentFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, ProfileFragment.instance(1/*todo*/))
+                    .replace(R.id.fragment_container, ProfileFragment.instance(1))
                     .addToBackStack(null)
                     .commit()
         }
@@ -130,7 +130,6 @@ class GlobeFragment : Fragment() {
     }
 
     private fun showPolygons() {
-        //TODO обновление данных с полигонами из обсервера
         polygons.addAll(GlobeUtils().getAllPolygons())
         layer.addAllRenderables(polygons)
     }

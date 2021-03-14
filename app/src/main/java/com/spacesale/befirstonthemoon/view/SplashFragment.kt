@@ -67,11 +67,13 @@ class SplashFragment : Fragment() {
             override fun onFinish() {
                 (activity as MainActivity).loadFragment(SelectFragment.newInstance(mPlanets))
             }
-            override fun onTick(millisUntilFinished: Long) {}
+            override fun onTick(millisUntilFinished: Long) {
+                // add later
+            }
         }.start()
     }
 
-    fun startAnimation() {
+    private fun startAnimation() {
         val metrics = getMetrics()
         val density = getDensity(metrics)
         val height = getScreenHeight(metrics)

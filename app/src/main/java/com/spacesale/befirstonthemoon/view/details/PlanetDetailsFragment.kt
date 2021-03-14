@@ -66,7 +66,7 @@ class PlanetDetailsFragment : Fragment() {
 
         binding.profileButton.setOnClickListener {
             parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, ProfileFragment.instance(1/*todo*/))
+                .replace(R.id.fragment_container, ProfileFragment.instance(1))
                 .addToBackStack(null)
                 .commit()
         }

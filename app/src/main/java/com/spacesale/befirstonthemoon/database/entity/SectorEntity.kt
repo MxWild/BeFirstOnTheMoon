@@ -17,15 +17,15 @@ data class SectorEntity(
     @ColumnInfo(name = "price")
     val price: Float,
     @ColumnInfo(name = "WKT")
-    val WKT: String,
+    val wkt: String,
     @ColumnInfo(name = "LAYER")
-    val LAYER: String,
+    val layer: String,
     @ColumnInfo(name = "COUNTRY_NA")
-    val COUNTRY_NA: String,
+    val countryNa: String,
     //ID участка
     @ColumnInfo(name = "ID")
-    val ID: Int,
+    val id: Int,
     //ID соседнего участка
     @ColumnInfo(name = "FAC_ID")
-    val FAC_ID: Int
+    val facId: Int
 )

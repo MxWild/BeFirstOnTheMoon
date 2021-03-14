@@ -2,20 +2,15 @@ package com.spacesale.befirstonthemoon.database
 
 import android.content.Context
 import com.opencsv.CSVReader
-import com.opencsv.CSVWriter
 import com.spacesale.befirstonthemoon.R
 import com.spacesale.befirstonthemoon.database.entity.PlanetEntity
 import com.spacesale.befirstonthemoon.database.entity.SectorEntity
 import kotlinx.coroutines.*
-import java.io.File
-import java.io.FileReader
-import java.io.FileWriter
 import java.io.InputStreamReader
-import kotlin.coroutines.suspendCoroutine
 
 class DatabaseStorage(private val context: Context, private val db: AppDatabase) {
 
-    val scope = CoroutineScope(Job() + Dispatchers.IO)
+    private val scope = CoroutineScope(Job() + Dispatchers.IO)
 
     private val planets: List<PlanetEntity> = listOf(
         PlanetEntity(
@@ -79,7 +74,7 @@ class DatabaseStorage(private val context: Context, private val db: AppDatabase)
                 return@launch
 
             val writer = CSVReader(InputStreamReader(context.assets.open("world_boundaries.csv")))
-            var csvLines: List<Array<String>>
+            val csvLines: List<Array<String>>
             csvLines = writer.readAll()
             writer.close()
 
@@ -92,11 +87,11 @@ class DatabaseStorage(private val context: Context, private val db: AppDatabase)
                             planetId = 1,
                             isSale = false,
                             price = 500000f,
-                            WKT = it[0],
-                            LAYER = it[1],
-                            COUNTRY_NA = it[2],
-                            ID = it[3].toInt(),
-                            FAC_ID = it[4].toInt()
+                            wkt = it[0],
+                            layer = it[1],
+                            countryNa = it[2],
+                            id = it[3].toInt(),
+                            facId = it[4].toInt()
                         )
                     )
                 }
@@ -112,11 +107,11 @@ class DatabaseStorage(private val context: Context, private val db: AppDatabase)
                             planetId = 2,
                             isSale = false,
                             price = 500000f,
-                            WKT = it[0],
-                            LAYER = it[1],
-                            COUNTRY_NA = it[2],
-                            ID = it[3].toInt(),
-                            FAC_ID = it[4].toInt()
+                            wkt = it[0],
+                            layer = it[1],
+                            countryNa = it[2],
+                            id = it[3].toInt(),
+                            facId = it[4].toInt()
                         )
                     )
                 }
@@ -132,11 +127,11 @@ class DatabaseStorage(private val context: Context, private val db: AppDatabase)
                             planetId = 3,
                             isSale = false,
                             price = 500000f,
-                            WKT = it[0],
-                            LAYER = it[1],
-                            COUNTRY_NA = it[2],
-                            ID = it[3].toInt(),
-                            FAC_ID = it[4].toInt()
+                            wkt = it[0],
+                            layer = it[1],
+                            countryNa = it[2],
+                            id = it[3].toInt(),
+                            facId = it[4].toInt()
                         )
                     )
                 }
