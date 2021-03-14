@@ -12,6 +12,7 @@ import android.view.animation.LinearInterpolator
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.transition.TransitionInflater
 import com.spacesale.befirstonthemoon.MainActivity
 import com.spacesale.befirstonthemoon.R
 import com.spacesale.befirstonthemoon.domain.Planet
@@ -30,6 +31,12 @@ class SplashFragment : Fragment() {
     private lateinit var cometLeft: ImageView
     private lateinit var cometRight: ImageView
     private lateinit var sun: ImageView
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val inflater = TransitionInflater.from(requireContext())
+        exitTransition = inflater.inflateTransition(R.transition.fade)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

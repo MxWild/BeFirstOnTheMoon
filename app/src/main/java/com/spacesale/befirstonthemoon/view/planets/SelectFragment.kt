@@ -31,6 +31,7 @@ class SelectFragment(planets: MutableMap<Int, Planet>) : Fragment() {
         super.onCreate(savedInstanceState)
         val inflater = TransitionInflater.from(requireContext())
         exitTransition = inflater.inflateTransition(R.transition.fade)
+        enterTransition = inflater.inflateTransition(R.transition.slide_right)
         reenterTransition = inflater.inflateTransition(R.transition.slide_left)
     }
 
