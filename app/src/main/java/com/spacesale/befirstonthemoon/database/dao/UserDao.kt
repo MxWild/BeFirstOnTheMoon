@@ -24,4 +24,7 @@ interface UserDao {
     @Query("SELECT * FROM purchase WHERE userId = :userId")
     fun getAllPurchase(userId: Int): List<PurchaseEntity>
 
+    @Query("SELECT * FROM purchase WHERE planetId = :planetId AND sectorId = :sectorId")
+    fun getPurchaseByPlanetAndSector(planetId: Int, sectorId: Int): List<PurchaseEntity>
+
 }

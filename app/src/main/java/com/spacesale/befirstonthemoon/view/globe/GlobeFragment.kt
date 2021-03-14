@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.transition.TransitionInflater
 import com.spacesale.befirstonthemoon.R
 import com.spacesale.befirstonthemoon.databinding.FragmentGlobeBinding
@@ -16,6 +17,7 @@ import gov.nasa.worldwind.layer.BackgroundLayer
 import gov.nasa.worldwind.layer.RenderableLayer
 import gov.nasa.worldwind.render.ImageSource
 import gov.nasa.worldwind.shape.Polygon
+import kotlinx.coroutines.launch
 import org.koin.android.viewmodel.ext.android.viewModel
 import kotlin.properties.Delegates
 
@@ -48,9 +50,9 @@ class GlobeFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         _binding = FragmentGlobeBinding.inflate(inflater, container, false)
         wwd = WorldWindow(context)
@@ -82,21 +84,32 @@ class GlobeFragment : Fragment() {
 
         binding.buttonProfile.setOnClickListener {
             parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, ProfileFragment.instance(1/*todo*/))
-                .addToBackStack(null)
-                .commit()
+                    .replace(R.id.fragment_container, ProfileFragment.instance(1/*todo*/))
+                    .addToBackStack(null)
+                    .commit()
         }
 
         binding.buttonBuy.setOnClickListener {
-            //TODO добавить покупку выбранного участка по кнопке
-            viewModel.buySector(planetId, polyId)
-            Toast
-                .makeText(
-                    context,
-                    String.format(getString(R.string.buy_toast), planet?.name),
-                    Toast.LENGTH_LONG
-                )
-                .show()
+            lifecycleScope.launch {
+                val b = viewModel.buySector(planetId, polyId)
+                if (b) {
+                    Toast
+                            .makeText(
+                                    context,
+                                    String.format(getString(R.string.buy_toast), planet?.name),
+                                    Toast.LENGTH_LONG
+                            )
+                            .show()
+                } else {
+                    Toast
+                            .makeText(
+                                    context,
+                                    "Данный участок уже приобретен",
+                                    Toast.LENGTH_LONG
+                            )
+                            .show()
+                }
+            }
         }
     }
 

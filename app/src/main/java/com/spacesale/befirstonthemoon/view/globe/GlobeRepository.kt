@@ -32,9 +32,14 @@ class GlobeRepository(private val db: AppDatabase) {
         characteristics = planetEntity.characteristic
     )
 
-    suspend fun buySector(planetId: Int,sectorId: Int)= withContext(Dispatchers.IO) {
-        db.sectorDao().buySector(planetId,sectorId)
-        db.userDao().insertPurchase(PurchaseEntity(null,1,planetId,sectorId))
+    suspend fun buySector(planetId: Int,sectorId: Int): Boolean = withContext(Dispatchers.IO) {
+        if (db.userDao().getPurchaseByPlanetAndSector(planetId, sectorId).count() == 0) {
+            db.sectorDao().buySector(planetId, sectorId)
+            db.userDao().insertPurchase(PurchaseEntity(null, 1, planetId, sectorId))
+            return@withContext true
+        } else {
+            return@withContext false
+        }
     }
 
     private fun convertSectorEntityToSector(sectorEntity: SectorEntity) = Sector(

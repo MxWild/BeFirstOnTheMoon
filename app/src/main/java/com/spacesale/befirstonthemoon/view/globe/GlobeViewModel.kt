@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.spacesale.befirstonthemoon.domain.Planet
 import com.spacesale.befirstonthemoon.domain.Sector
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
@@ -46,11 +47,12 @@ class GlobeViewModel(
         }
     }
 
-    fun buySector(planetId: Int,sectorId: Int) {
-        viewModelScope.launch {
-            repository.buySector(planetId,sectorId)
-        }
-
+    suspend fun buySector(planetId: Int, sectorId: Int): Boolean {
+        var b: Boolean = false
+        viewModelScope.async {
+            b = repository.buySector(planetId,sectorId)
+        }.await()
+        return b
     }
 
 }
