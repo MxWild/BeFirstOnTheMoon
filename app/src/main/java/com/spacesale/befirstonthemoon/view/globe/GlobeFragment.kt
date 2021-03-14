@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import com.spacesale.befirstonthemoon.R
 import com.spacesale.befirstonthemoon.databinding.FragmentGlobeBinding
 import com.spacesale.befirstonthemoon.domain.Planet
@@ -19,8 +18,6 @@ import gov.nasa.worldwind.layer.RenderableLayer
 import gov.nasa.worldwind.render.ImageSource
 import gov.nasa.worldwind.shape.Polygon
 import gov.nasa.worldwind.shape.ShapeAttributes
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import org.koin.android.viewmodel.ext.android.viewModel
 import kotlin.properties.Delegates
 
@@ -35,7 +32,7 @@ class GlobeFragment : Fragment() {
     private var _binding: FragmentGlobeBinding? = null
     private val binding get() = _binding!!
 
-    private var polygons: List<Polygon> = emptyList()
+    private var polygons: MutableList<Polygon> = emptyList<Polygon>().toMutableList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,17 +56,19 @@ class GlobeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        showPolygons()
+
         viewModel.planet.observe(viewLifecycleOwner) {
             showGlobe(planetId)
             planet = it
         }
 
-        viewModel.sectors.observe(viewLifecycleOwner) { sectors ->
+/*        viewModel.sectors.observe(viewLifecycleOwner) { sectors ->
             lifecycleScope.launch(Dispatchers.IO) {
                 polygons = PolygonConverter().converterDbToPolygons(sectors.map { it.WKT })
                 showPolygons()
             }
-        }
+        }*/
 
         viewModel.loadSectors(planetId)
 
@@ -115,6 +114,7 @@ class GlobeFragment : Fragment() {
 
     private fun showPolygons() {
         //TODO обновление данных с полигонами из обсервера
+        polygons.addAll(GlobeUtils().getAllPolygons())
         layer.addAllRenderables(polygons)
     }
 

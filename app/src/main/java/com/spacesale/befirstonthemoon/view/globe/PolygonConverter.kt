@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 
 class PolygonConverter {
 
-    val scope = CoroutineScope(Job() + Dispatchers.IO)
+    private val scope = CoroutineScope(Job() + Dispatchers.IO)
 
     fun converterDbToPolygons(countryCoordinates: List<String>): List<Polygon> {
 
