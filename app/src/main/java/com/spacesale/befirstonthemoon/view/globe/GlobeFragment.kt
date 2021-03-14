@@ -22,6 +22,8 @@ import gov.nasa.worldwind.shape.ShapeAttributes
 import org.koin.android.viewmodel.ext.android.viewModel
 import kotlin.properties.Delegates
 
+var polyId: Int = 0
+
 class GlobeFragment : Fragment() {
 
     private val viewModel: GlobeViewModel by viewModel()
@@ -33,12 +35,14 @@ class GlobeFragment : Fragment() {
     private var _binding: FragmentGlobeBinding? = null
     private val binding get() = _binding!!
 
+    private var polygons: MutableList<Polygon> = emptyList<Polygon>().toMutableList()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             planetId = it.getInt(PARAM_PLANET_ID)
             viewModel.loadPlanetInfo(planetId)
-            viewModel.loadSectors(planetId)
+            //viewModel.loadSectors(planetId)
         }
         val inflater = TransitionInflater.from(requireContext())
 
@@ -66,9 +70,14 @@ class GlobeFragment : Fragment() {
             planet = it
         }
 
-        viewModel.sectors.observe(viewLifecycleOwner) {
-            //todo
-        }
+/*        viewModel.sectors.observe(viewLifecycleOwner) { sectors ->
+            lifecycleScope.launch(Dispatchers.IO) {
+                polygons = PolygonConverter().converterDbToPolygons(sectors.map { it.WKT })
+                showPolygons()
+            }
+        }*/
+
+        viewModel.loadSectors(planetId)
 
         binding.buttonBack.setOnClickListener {
             parentFragmentManager.popBackStack()
@@ -83,7 +92,7 @@ class GlobeFragment : Fragment() {
 
         binding.buttonBuy.setOnClickListener {
             //TODO добавить покупку выбранного участка по кнопке
-            viewModel.buySector(planetId,1)
+            viewModel.buySector(planetId, polyId)
             Toast
                 .makeText(
                     context,
@@ -112,12 +121,13 @@ class GlobeFragment : Fragment() {
 
     private fun showPolygons() {
         //TODO обновление данных с полигонами из обсервера
-//        layer.addAllRenderables(listOf(poly))
+        polygons.addAll(GlobeUtils().getAllPolygons())
+        layer.addAllRenderables(polygons)
     }
 
     private fun showGlobe(planetId: Int) {
         viewModel.loadPlanetInfo(planetId)
-        viewModel.loadSectors(planetId)
+        //viewModel.loadSectors(planetId)
         binding.globe.addView(createWorldWindow())
     }
 

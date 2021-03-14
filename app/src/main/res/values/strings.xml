@@ -8,5 +8,6 @@
     <string name="buy_button">Покупка</string>
     <string name="buy_toast">Поздравляем с покупкой на планете %s!</string>
     <string name="profile_title_screen">Мои покупки</string>
+    <string name="price_button">Купить</string>
 
 </resources>
