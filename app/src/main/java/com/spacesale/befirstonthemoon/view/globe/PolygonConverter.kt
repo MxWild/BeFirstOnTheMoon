@@ -4,15 +4,23 @@ import gov.nasa.worldwind.WorldWind
 import gov.nasa.worldwind.geom.Position
 import gov.nasa.worldwind.shape.Polygon
 import gov.nasa.worldwind.shape.ShapeAttributes
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class PolygonConverter {
 
-    fun converterDbToPolygons(countryCoordinates: List<String>): List<Polygon> {
-        val polygons: MutableList<Polygon> = emptyList<Polygon>().toMutableList()
+    val scope = CoroutineScope(Job() + Dispatchers.IO)
 
-        countryCoordinates.forEach { stringFromTable ->
-            val converterStringToPolygons = converterStringToPolygons(stringFromTable)
-            polygons.add(converterStringToPolygons)
+    fun converterDbToPolygons(countryCoordinates: List<String>): List<Polygon> {
+
+        val polygons: MutableList<Polygon> = emptyList<Polygon>().toMutableList()
+        scope.launch {
+            countryCoordinates.forEach { stringFromTable ->
+                val converterStringToPolygons = converterStringToPolygons(stringFromTable)
+                polygons.add(converterStringToPolygons)
+            }
         }
 
         return polygons

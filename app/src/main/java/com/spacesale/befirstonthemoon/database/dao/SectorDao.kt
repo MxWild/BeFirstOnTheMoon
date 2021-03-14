@@ -10,7 +10,7 @@ interface SectorDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(sectors: List<SectorEntity>)
 
-    @Query("SELECT * FROM sector WHERE planetId = :planetId LIMIT 500")
+    @Query("SELECT * FROM sector WHERE planetId = :planetId LIMIT 100")
     fun getSectorsByPlanetId(planetId: Int): List<SectorEntity>
 
     @Query("SELECT * FROM sector WHERE planetId = :planetId AND sectorId = :sectorId")

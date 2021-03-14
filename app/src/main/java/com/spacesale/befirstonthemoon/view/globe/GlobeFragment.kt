@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.spacesale.befirstonthemoon.R
 import com.spacesale.befirstonthemoon.databinding.FragmentGlobeBinding
 import com.spacesale.befirstonthemoon.domain.Planet
@@ -18,6 +19,8 @@ import gov.nasa.worldwind.layer.RenderableLayer
 import gov.nasa.worldwind.render.ImageSource
 import gov.nasa.worldwind.shape.Polygon
 import gov.nasa.worldwind.shape.ShapeAttributes
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.koin.android.viewmodel.ext.android.viewModel
 import kotlin.properties.Delegates
 
@@ -62,8 +65,10 @@ class GlobeFragment : Fragment() {
         }
 
         viewModel.sectors.observe(viewLifecycleOwner) { sectors ->
-            polygons = PolygonConverter().converterDbToPolygons(sectors.map { it.WKT })
-            showPolygons()
+            lifecycleScope.launch(Dispatchers.IO) {
+                polygons = PolygonConverter().converterDbToPolygons(sectors.map { it.WKT })
+                showPolygons()
+            }
         }
 
         viewModel.loadSectors(planetId)
