@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.transition.TransitionInflater
 import androidx.viewpager2.widget.ViewPager2
 import com.spacesale.befirstonthemoon.R
 import com.spacesale.befirstonthemoon.domain.Planet
@@ -25,6 +26,13 @@ class SelectFragment(planets: MutableMap<Int, Planet>) : Fragment() {
     private lateinit var rightArrow: ImageView
 
     private lateinit var loadText: TextView
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val inflater = TransitionInflater.from(requireContext())
+        exitTransition = inflater.inflateTransition(R.transition.fade)
+        reenterTransition = inflater.inflateTransition(R.transition.slide_left)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
