@@ -55,12 +55,12 @@ class SelectPlanetFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance(position: Int, planets: Map<Int, Planet>): Fragment {
+        fun newInstance(planet: Planet): Fragment {
             val fragment = SelectPlanetFragment()
             fragment.arguments = Bundle().apply {
-                putInt(ARG_PLANET_ID, position + 1)
-                putString(ARG_PLANET_NAME, planets[position + 1]!!.name)
-                putInt(ARG_PLANET_DRAWABLE, planets[position + 1]!!.mainPoster)
+                putInt(ARG_PLANET_ID, planet.id)
+                putString(ARG_PLANET_NAME, planet.name)
+                putInt(ARG_PLANET_DRAWABLE, planet.mainPoster)
             }
             return fragment
         }
