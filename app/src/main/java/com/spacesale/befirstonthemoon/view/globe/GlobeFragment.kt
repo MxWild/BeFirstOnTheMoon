@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.transition.TransitionInflater
 import com.spacesale.befirstonthemoon.R
 import com.spacesale.befirstonthemoon.databinding.FragmentGlobeBinding
 import com.spacesale.befirstonthemoon.domain.Planet
@@ -39,6 +40,10 @@ class GlobeFragment : Fragment() {
             viewModel.loadPlanetInfo(planetId)
             viewModel.loadSectors(planetId)
         }
+        val inflater = TransitionInflater.from(requireContext())
+
+        enterTransition = inflater.inflateTransition(R.transition.slide_right)
+
     }
 
     override fun onCreateView(

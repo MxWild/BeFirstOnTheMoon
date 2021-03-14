@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.transition.TransitionInflater
 import coil.load
 import com.spacesale.befirstonthemoon.R
 import com.spacesale.befirstonthemoon.databinding.FragmentPlanetDetailsBinding
@@ -29,6 +30,10 @@ class PlanetDetailsFragment : Fragment() {
         arguments?.let {
             planetId = it.getInt(PARAM_PLANET_ID)
         }
+        val inflater = TransitionInflater.from(requireContext())
+        enterTransition = inflater.inflateTransition(R.transition.slide_right)
+        exitTransition = inflater.inflateTransition(R.transition.fade)
+        reenterTransition = inflater.inflateTransition(R.transition.slide_left)
     }
 
     override fun onCreateView(
