@@ -21,6 +21,8 @@ import gov.nasa.worldwind.shape.ShapeAttributes
 import org.koin.android.viewmodel.ext.android.viewModel
 import kotlin.properties.Delegates
 
+var polyId: Int = 0
+
 class GlobeFragment : Fragment() {
 
     private val viewModel: GlobeViewModel by viewModel()
@@ -85,7 +87,7 @@ class GlobeFragment : Fragment() {
 
         binding.buttonBuy.setOnClickListener {
             //TODO добавить покупку выбранного участка по кнопке
-            viewModel.buySector(planetId,1)
+            viewModel.buySector(planetId, polyId)
             Toast
                 .makeText(
                     context,

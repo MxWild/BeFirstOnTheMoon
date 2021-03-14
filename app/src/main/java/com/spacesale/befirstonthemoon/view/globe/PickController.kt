@@ -79,6 +79,7 @@ open class PickController(private val context: Context) : BasicWorldWindowContro
         }
         if (message.isNotEmpty()) {
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+            polyId = message.split(" ")[1].toInt()
         }
         this.worldWindow.requestRedraw()
     }
